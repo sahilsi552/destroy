@@ -147,17 +147,17 @@ async def dicepoker(bot, message):
 __HELP__ = """  
 *To Play Games Using Emojis:*  
 
-✦ /dice 🎲 : Have a thrilling dice game with BaBa  
-✦ /dart 🎯 : Engage in a dart competition with BaBa  
-✦ /basket 🏀 : Have a fun basketball shoot-out with BaBa  
-✦ /ball 🎳 : Go on a virtual bowling session with BaBa  
-✦ /football ⚽ : Have an exciting football match with BaBa  
-✦ /jackpot 🎰 : Spin the slot machine and try your luck with BaBa  
-✦ /dicepoker 🎲 : Play a dice poker game with BaBa  
-✦ /coinflip 🪙 : Flip a coin and see the result  
-✦ /rockpaperscissors 🪨📄✂️ : Play Rock-Paper-Scissors with BaBa  
-✦ /leaderboard 🏆 : View the top scores and compete with others  
-✦ /resetleaderboard 🔄 : Reset the leaderboard for a fresh start  
+๏ /dice 🎲 : Have a thrilling dice game with BaBa  
+๏ /dart 🎯 : Engage in a dart competition with BaBa  
+๏ /basket 🏀 : Have a fun basketball shoot-out with BaBa  
+๏ /ball 🎳 : Go on a virtual bowling session with BaBa  
+๏ /football ⚽ : Have an exciting football match with BaBa  
+๏ /jackpot 🎰 : Spin the slot machine and try your luck with BaBa  
+๏ /dicepoker 🎲 : Play a dice poker game with BaBa  
+๏ /coinflip 🪙 : Flip a coin and see the result  
+๏ /rockpaperscissors 🪨📄✂️ : Play Rock-Paper-Scissors with BaBa  
+๏ /leaderboard 🏆 : View the top scores and compete with others  
+๏ /resetleaderboard 🔄 : Reset the leaderboard for a fresh start  
 """  
 
-__MODULE__ = "🎯 Match"
+__MODULE__ = "Match"
