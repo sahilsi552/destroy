@@ -186,7 +186,7 @@ async def get_moves(client, message):
     await fetch_and_reply("move/", "Moves", "⚔️", client, message)  
 
 # Module metadata  
-__MODULE__ = "Pokedex"  
+__MODULE__ = "Pᴏᴋᴇᴅᴇx"  
 __HELP__ = """  
 ⬤ /pokemon <name> ➥ Search for a Pokémon character.  
 ⬤ /berries ➥ Get a list of berries.  
