@@ -128,10 +128,10 @@ async def webss_help(_, message: Message):
 
 __HELP__ = """  
 *Website Capture:*  
-✦ /webshot <URL> : Takes a screenshot of the specified webpage and presents it to you 🌐  
-✦ /webshot <URL> <full> : Takes a full-page screenshot if <full> is 'yes', 'y', '1', or 'true'.  
-✦ /webshot <URL> <full> <width>x<height> : Takes a screenshot with custom dimensions.  
-✦ /webss_status : Checks the status of the screenshot service.  
-✦ /webss_help : Shows this help message.  
+๏ /webshot <URL> : Takes a screenshot of the specified webpage and presents it to you 🌐  
+๏ /webshot <URL> <full> : Takes a full-page screenshot if <full> is 'yes', 'y', '1', or 'true'.  
+๏ /webshot <URL> <full> <width>x<height> : Takes a screenshot with custom dimensions.  
+๏ /webss_status : Checks the status of the screenshot service.  
+๏ /webss_help : Shows this help message.  
 """  
-__MODULE__ = "🌐 WebPic" 
+__MODULE__ = "𝙒𝙚𝙗𝙋𝙞𝙘" 
