@@ -36,7 +36,7 @@ async def private_start(app, message: Message):
                 f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>ᴛʀᴀᴄᴋ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b>\n\n<b>ᴜsᴇʀ ɪᴅ:</b> {sender_id}\n<b>ᴜsᴇʀɴᴀᴍᴇ:</b> {sender_name}",
             )
     else:
-        out = private_panel()
+        out = private_panel2()
         image = config.START_IMG
         TXT = f"""*ʜᴇʏ* {message.from_user.mention} , 🥀
 *๏ ɪ'ᴍ {QuantamBot.mention} ʜᴇʀᴇ ᴛᴏ ʜᴇʟᴘ ʏᴏᴜ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘs!

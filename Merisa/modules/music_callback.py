@@ -20,8 +20,37 @@ from Merisa.inline import (private_panel,
     start_pannel,
     private_help_panel,admin_help_panel,private_panel2
 )
- 
-        
+from config import START_IMG
+@app.on_message(filters.command("music")) 
+async def music_help(b,m):
+    await m.reply_photo(START_IMG,f"""
+ ʜᴇʀᴇ ɪꜱ ʜᴇʟᴘ ᴍᴇɴᴜ ꜰᴏʀ ᴍᴜꜱɪᴄ 
+""",
+            parse_mode=ParseMode.MARKDOWN,
+            
+            reply_markup=InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton(text="ᴀᴅᴍɪɴ", callback_data="Music_admin"),
+            InlineKeyboardButton(text="Auth", callback_data="Music_auth"),
+            InlineKeyboardButton(text="C-Play", callback_data="Music_Cplay"),
+        ],
+        [
+            InlineKeyboardButton(text="Loop", callback_data="Music_loop"),
+            InlineKeyboardButton(text="ᴘʟᴀʏ ", callback_data="Music_play"),
+            InlineKeyboardButton(text=" ʙᴏᴛ", callback_data="Music_bot"),
+        ],
+        [
+            InlineKeyboardButton(text="shuffle", callback_data="Music_shuffle"),
+            InlineKeyboardButton(text="Seek", callback_data="Music_seek"),
+            InlineKeyboardButton(text="Speed", callback_data="Music_speed"),
+        ],
+        [  # Added comma here
+            InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Main_help"),
+        ],
+    ]
+    ))
+           
 @app.on_callback_query(filters.regex("^mukesh_back"))
 async def back_callback(bot, query):
     if query.data == "mukesh_back":
@@ -34,7 +63,8 @@ async def back_callback(bot, query):
         
 @app.on_callback_query(filters.regex("^Music_"))
 async def Music_about_callback(bot, query):
-    if query.data == "Music_":                
+    if query.data == "Music_":  
+        await query.answer(" ʜᴇʀᴇ ɪꜱ ʜᴇʟᴘ ᴍᴇɴᴜ ꜰᴏʀ ᴍᴜꜱɪᴄ ")              
         await query.message.edit_text(f"""
  ʜᴇʀᴇ ɪꜱ ʜᴇʟᴘ ᴍᴇɴᴜ ꜰᴏʀ ᴍᴜꜱɪᴄ 
 """,
@@ -233,6 +263,7 @@ async def advance_callback(bot, query):
             ),
         )
     elif query.data=="basic_help":
+        await query.answer(" ʜᴇʀᴇ ɪꜱ  Bᴀsɪᴄ ʜᴇʟᴘ ᴍᴇɴᴜ ")
         await query.message.edit_text("""Bᴀsɪᴄ Cᴏᴍᴍᴀɴᴅs.
 👮🏻Aᴠᴀɪʟᴀʙʟᴇ ᴛᴏ Aᴅᴍɪɴs & Mᴏᴅᴇʀᴀᴛᴏʀs.
 🕵🏻Aᴠᴀɪʟᴀʙʟᴇ ᴛᴏ Aᴅᴍɪɴs.
@@ -256,6 +287,7 @@ async def advance_callback(bot, query):
             ),
             )
     elif query.data=="expert_help":
+        await query.answer(" ʜᴇʀᴇ ɪꜱ  Exᴘᴇʀᴛ ʜᴇʟᴘ ᴍᴇɴᴜ ")
         await query.message.edit_text("""Exᴘᴇʀᴛ ᴄᴏᴍᴍᴀɴᴅs
 
 👥 Aᴠᴀɪʟᴀʙʟᴇ ᴛᴏ ᴀʟʟ ᴜsᴇʀs
@@ -283,6 +315,7 @@ Pɪɴɴᴇᴅ Mᴇssᴀɢᴇs
             ),
             )                                        
     elif query.data=="advance_help":
+        await query.answer(" ʜᴇʀᴇ ɪꜱ  Aᴅᴠᴀɴᴄᴇ ʜᴇʟᴘ ᴍᴇɴᴜ ")
         await query.message.edit_text("""Aᴅᴠᴀɴᴄᴇᴅ Cᴏᴍᴍᴀɴᴅs
 
 👮🏻Aᴠᴀɪʟᴀʙʟᴇ ᴛᴏ Aᴅᴍɪɴs & Mᴏᴅᴇʀᴀᴛᴏʀs.
@@ -306,6 +339,7 @@ Wᴀʀɴ Mᴀɴᴀɢᴇᴍᴇɴᴛ
             ),
         )
     elif query.data=="donation_help":
+        await query.answer(" ʜᴇʀᴇ ɪꜱ  ᴅᴏɴᴀᴛɪᴏɴs ʜᴇʟᴘ ᴍᴇɴᴜ ")
         await query.message.edit_text("""Aʀᴇ ʏᴏᴜ ɪɴᴛᴇʀᴇsᴛᴇᴅ ɪɴ ʜᴇʟᴘɪɴɢ ᴍʏ ᴄʀᴇᴀᴛᴏʀ ᴡɪᴛʜ ʜɪs ᴇғғᴏʀᴛs ᴛᴏ ᴋᴇᴇᴘ ᴍᴇ ɪɴ ᴀᴄᴛɪᴠᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ? Iғ ʏᴇs, Yᴏᴜ'ʀᴇ ɪɴ ᴛʜᴇ ʀɪɢʜᴛ ᴘʟᴀᴄᴇ. 
 
 Wᴇ ᴇᴍᴘʜᴀsɪsᴇ ᴛʜᴇ ɪᴍᴘᴏʀᴛᴀɴᴄᴇ ᴏғ ɴᴇᴇᴅɪɴɢ ғᴜɴᴅs ᴛᴏ ᴋᴇᴇᴘ MᴜᴋᴇsʜRᴏʙᴏᴛ ᴜɴᴅᴇʀ ᴀᴄᴛɪᴠᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ. Yᴏᴜʀ ᴅᴏɴᴀᴛɪᴏɴs ɪɴ ᴀɴʏ ᴀᴍᴏᴜɴᴛ ᴏғ ᴍᴏɴᴇʏ ᴛᴏ MᴜᴋᴇsʜRᴏʙᴏᴛ sᴇʀᴠᴇʀs ᴀɴᴅ ᴏᴛʜᴇʀ ᴜᴛɪʟɪᴛɪᴇs ᴡɪʟʟ ᴀʟʟᴏᴡ ᴜs ᴛᴏ sᴜsᴛᴀɪɴ ᴛʜᴇ ʟɪғᴇsᴘᴀɴ ɪɴ ᴛʜᴇ ʟᴏɴɢ ᴛᴇʀᴍ. Wᴇ ᴡɪʟʟ ᴜsᴇ ᴀʟʟ ᴏғ ᴛʜᴇ ᴅᴏɴᴀᴛɪᴏɴs ᴛᴏ ᴄᴏᴠᴇʀ ғᴜᴛᴜʀᴇ ᴇxᴘᴇɴsᴇs ᴀɴᴅ ᴜᴘɢʀᴀᴅᴇs ᴏғ ᴛʜᴇ sᴇʀᴠᴇʀs ᴄᴏsᴛs. Iғ ʏᴏᴜ'ᴠᴇ ɢᴏᴛ sᴘᴀʀᴇ ᴍᴏɴᴇʏ ᴛᴏ ʜᴇʟᴘ ᴜs ɪɴ ᴛʜɪs ᴇғғᴏʀᴛ, Kɪɴᴅʟʏ ᴅᴏ sᴏ ᴀɴᴅ ʏᴏᴜʀ ᴅᴏɴᴀᴛɪᴏɴs ᴄᴀɴ ᴀʟsᴏ ᴍᴏᴛɪᴠᴀᴛᴇ ᴜs ᴋᴇᴇᴘ ʙʀɪɴɢ ᴏɴ ɴᴇᴡ ғᴇᴀᴛᴜʀᴇs.
@@ -321,6 +355,7 @@ Yᴏᴜ ᴄᴀɴ ʜᴇʟᴘ ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ ᴡɪᴛʜ 
             ),
             )  
     elif query.data=="userbot_help":
+        await query.answer(" ʜᴇʀᴇ ɪꜱ  Userbot ʜᴇʟᴘ ᴍᴇɴᴜ ")
         await query.message.delete()
         await query.message.reply_text(ub_help,reply_markup=InlineKeyboardMarkup(
                 [

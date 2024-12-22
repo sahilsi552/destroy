@@ -67,6 +67,7 @@ async def help_button(_, query: CallbackQuery):
 @app.on_callback_query(filters.regex("home_help"))
 async def back(_, query: CallbackQuery):
     try:
+        await query.answer("Here is the main help menu")
         buttons = page_load(0, HELPABLE, "help")
         await query.message.edit(
             f"ᴄʜᴏᴏsᴇ ᴛʜᴇ ᴄᴀᴛᴇɢᴏʀʏ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴɴᴀ ɢᴇᴛ ʜᴇʟᴩ.\nᴀsᴋ ʏᴏᴜʀ ᴅᴏᴜʙᴛs ᴀᴛ @{SUPPORT_GRP}\n\n๏ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴡɪᴛʜ : `/`",
@@ -80,6 +81,7 @@ async def back(_, query: CallbackQuery):
 async def back(_, query: CallbackQuery):
     try:
         buttons = page_load(0, HELPABLE, "help")
+        await query.answer("Here is the main help menu")
         await query.message.edit(
             f"ᴄʜᴏᴏsᴇ ᴛʜᴇ ᴄᴀᴛᴇɢᴏʀʏ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴɴᴀ ɢᴇᴛ ʜᴇʟᴩ.\nᴀsᴋ ʏᴏᴜʀ ᴅᴏᴜʙᴛs ᴀᴛ @{SUPPORT_GRP}\n\n๏ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴡɪᴛʜ : `/`",
             reply_markup=InlineKeyboardMarkup(buttons),
@@ -108,24 +110,21 @@ async def help_cmd(_, msg: Message):
         await msg.delete()
     except:
         pass
-    
-    if msg.from_user.id in SUDOERS:
-        buttons=admin_help_panel()
-        await msg.reply_photo(START_IMG,caption="» Wʜᴇʀᴇ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴏᴘᴇɴ ᴛʜᴇ sᴇᴛᴛɪɴɢs ᴍᴇɴᴜ?",reply_markup=InlineKeyboardMarkup(buttons))
-    else:    
-        buttons = page_load(0, HELPABLE, "help")
-        await msg.reply_photo(START_IMG,
-            f"ᴄʜᴏᴏsᴇ ᴛʜᴇ ᴄᴀᴛᴇɢᴏʀʏ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴɴᴀ ɢᴇᴛ ʜᴇʟᴩ.\n๏ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴡɪᴛʜ : `/`",
-            reply_markup=InlineKeyboardMarkup(buttons),
-        )
+       
+    buttons = page_load(0, HELPABLE, "help")
+    await msg.reply_photo(START_IMG,
+        f"ᴄʜᴏᴏsᴇ ᴛʜᴇ ᴄᴀᴛᴇɢᴏʀʏ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴɴᴀ ɢᴇᴛ ʜᴇʟᴩ.\n๏ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴡɪᴛʜ : `/`",
+        reply_markup=InlineKeyboardMarkup(buttons),
+    )
 @app.on_message(filters.command(["help"]) & filters.private & ~BANNED_USERS)
 async def help_cmd(_, msg: Message):
+    await msg.delete()
+    
     try:
-        await msg.delete()
-    except:
-        pass
-    
-    
-    buttons=admin_help_panel()
-    await msg.reply_photo(START_IMG,caption="» Wʜᴇʀᴇ ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴏᴘᴇɴ ᴛʜᴇ sᴇᴛᴛɪɴɢs ᴍᴇɴᴜ?",reply_markup=InlineKeyboardMarkup(buttons))
-    
+        buttons = page_load(0, HELPABLE, "help")
+        await msg.reply_photo(START_IMG,
+            f"ᴄʜᴏᴏsᴇ ᴛʜᴇ ᴄᴀᴛᴇɢᴏʀʏ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴɴᴀ ɢᴇᴛ ʜᴇʟᴩ.\nᴀsᴋ ʏᴏᴜʀ ᴅᴏᴜʙᴛs ᴀᴛ @{SUPPORT_GRP}\n\n๏ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴡɪᴛʜ : `/`",
+            reply_markup=InlineKeyboardMarkup(buttons),
+        )
+    except MessageNotModified:
+        return

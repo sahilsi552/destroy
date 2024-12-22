@@ -1,6 +1,6 @@
 import asyncio
 from contextlib import suppress
-from config import OWNER_ID
+from config import SUDOERS
 from pyrogram import filters
 from pyrogram.errors import ChatWriteForbidden, ChatAdminRequired
 from pyrogram.types import (
@@ -108,7 +108,7 @@ async def kickFunc(_, message: Message):
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ғɪɴᴅ ᴛʜᴀᴛ ᴜsᴇʀ !")
         if user_id == app.id:
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ᴋɪᴄᴋ ᴍʏsᴇʟғ !")
-        if user_id in OWNER_ID:
+        if user_id in SUDOERS:
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ᴋɪᴄᴋ ᴍʏ ᴏᴡɴᴇʀ !")
         if user_id in (await list_admins(message.chat.id)):
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ᴋɪᴄᴋ ᴀɴ ᴀᴅᴍɪɴ !")
@@ -148,7 +148,7 @@ async def banFunc(_, message: Message):
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ғɪɴᴅ ᴛʜᴀᴛ ᴜsᴇʀ !")
         if user_id == app.id:
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ʙᴀɴ ᴍʏsᴇʟғ !")
-        if user_id in OWNER_ID:
+        if user_id in SUDOERS:
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ᴋɪᴄᴋ ᴍʏ ᴏᴡɴᴇʀ !")
         if user_id in (await list_admins(message.chat.id)):
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ʙᴀɴ ᴀɴ ᴀᴅᴍɪɴ !")
@@ -410,7 +410,7 @@ async def mute(_, message: Message):
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ғɪɴᴅ ᴛʜᴀᴛ ᴜsᴇʀ !")
         if user_id == app.id:
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ᴍᴜᴛᴇ ᴍʏsᴇʟғ !")
-        if user_id in OWNER_ID:
+        if user_id in SUDOERS:
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ᴍᴜᴛᴇ ᴍʏ ᴏᴡɴᴇʀ !")
         if user_id in (await list_admins(message.chat.id)):
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ᴍᴜᴛᴇ ᴀɴ ᴀᴅᴍɪɴ !")
@@ -531,7 +531,7 @@ async def warn_user(_, message: Message):
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ғɪɴᴅ ᴛʜᴀᴛ ᴜsᴇʀ !")
         if user_id == app.id:
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ᴡᴀʀɴ ᴍʏsᴇʟғ !")
-        if user_id in OWNER_ID:
+        if user_id in SUDOERS:
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ᴡᴀʀɴ ᴍʏ ᴏᴡɴᴇʀ !")
         if user_id in (await list_admins(chat_id)):
             return await message.reply_text("ɪ ᴄᴀɴ'ᴛ ᴡᴀʀɴ ᴀɴ ᴀᴅᴍɪɴ !")

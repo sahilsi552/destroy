@@ -25,9 +25,6 @@ from Merisa.database import is_served_user
     )
 )
 async def gemini_reply(b, message):
-    x=await is_served_user(message.from_user.id)
-    if x==False:
-        return await message.reply("you are not verifed user start me in pm to verfiy",reply_markup=VERIFY)
     await  b.send_chat_action(message.chat.id,ChatAction.TYPING)
     
     text=await question(message)
