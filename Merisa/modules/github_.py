@@ -8,7 +8,7 @@ import re
 @QuantamBot.on_message(filters.command(["github","git"]))
 async def github(_, message):
     if len(message.command) != 2:
-        return await message.reply_text("/github {username} \nExample`/github Noob-QuantamBot`")
+        return await message.reply_text("/github {username} \nExample`/github sahilsi552`")
     username = message.text.split(None, 1)[1]
     URL = f"https://api.github.com/users/{username}"
     async with ClientSession() as session:
@@ -62,5 +62,5 @@ __MODULE__ = "Gɪᴛʜᴜʙ"
 __HELP__ = """
 ᴘʀᴏᴠɪᴅᴇs ʏᴏᴜ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴀ ɢɪᴛʜᴜʙ ᴘʀᴏғɪʟᴇ. 
 
- ❍ /github <ᴜsᴇʀɴᴀᴍᴇ> *:* ɢᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴀ ɢɪᴛʜᴜʙ ᴜsᴇʀ.
+ ๏ /github <ᴜsᴇʀɴᴀᴍᴇ> *:* ɢᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴀ ɢɪᴛʜᴜʙ ᴜsᴇʀ.
 """
