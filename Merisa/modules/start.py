@@ -38,10 +38,13 @@ async def private_start(app, message: Message):
     else:
         out = private_panel2()
         image = config.START_IMG
-        TXT = f"""*ʜᴇʏ* {message.from_user.mention} , 🥀
-*๏ ɪ'ᴍ {QuantamBot.mention} ʜᴇʀᴇ ᴛᴏ ʜᴇʟᴘ ʏᴏᴜ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘs!
-ʜɪᴛ ʜᴇʟᴘ ᴛᴏ ғɪɴᴅ ᴏᴜᴛ ᴍᴏʀᴇ ᴀʙᴏᴜᴛ ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ ɪɴ ᴍʏ ғᴜʟʟ ᴘᴏᴛᴇɴᴛɪᴀʟ!*
-➻ *ᴛʜᴇ ᴍᴏsᴛ ᴩᴏᴡᴇʀғᴜʟ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴩ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ ᴀɴᴅ ɪ ʜᴀᴠᴇ sᴏᴍᴇ ᴀᴡᴇsᴏᴍᴇ ᴀɴᴅ ᴜsᴇғᴜʟ ғᴇᴀᴛᴜʀᴇs.*
+        TXT = f""" Hello {message.from_user.mention} 🥀.
+
+๏ This is {QuantamBot.mention} 🖤!
+➻ The most comprehensive Telegram bot for managing and protecting group chats from spammers and rule-breakers.
+
+──────────────────
+๏ Click the help button to learn about my modules and commands.
 """
         try:
             await message.reply_photo(
