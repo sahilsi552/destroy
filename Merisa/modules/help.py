@@ -95,9 +95,13 @@ async def back(_, query: CallbackQuery):
     try:
         buttons = private_panel()
         await query.message.edit(
-            text=f"""ʜᴇʏ {query.from_user.mention}
-**ᴛʜɪs ɪs {app.mention} ᴀ ᴛᴇʟᴇɢʀᴀᴍ  ʙᴏᴛ ᴡɪᴛʜ ꜱᴏᴍᴇ ᴀᴡᴇꜱᴏᴍᴇ ꜰᴇᴀᴛᴜʀᴇꜱ....
-ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʜᴇʟᴩ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ɪɴғᴏ ᴀʙᴏᴜᴛ ᴍʏ ᴄᴏᴍᴍᴀɴᴅs :**""",
+            text=f"""Hello {query.from_user.mention} 🥀.
+
+๏ This is {app.mention} 🖤!
+➻ The most comprehensive Telegram bot for managing and protecting group chats from spammers and rule-breakers.
+
+──────────────────
+๏ Click the help button to learn about my modules and commands.""",
             reply_markup=InlineKeyboardMarkup(buttons),
         )
     except MessageNotModified:
