@@ -1,6 +1,6 @@
 from pyrogram import *
 import requests as re
-from Quantumbot import app, 
+from QuantumBot import app, 
 from pyrogram.types import InlineKeyboardButton,InlineKeyboardMarkup
 import wget
 import os 
