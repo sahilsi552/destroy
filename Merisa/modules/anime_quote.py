@@ -130,5 +130,5 @@ async def animequotes(client, message):
 
 __MODULE__ = "Qᴜᴏᴛᴇs"
 __HELP__ = """
-/animequotes :- ᴡʀɪᴛᴇ ᴀɴɪᴍᴇǫᴜᴏᴛᴇs
+๏ /animequotes :- ᴡʀɪᴛᴇ ᴀɴɪᴍᴇǫᴜᴏᴛᴇs
  """
