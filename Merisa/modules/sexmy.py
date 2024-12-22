@@ -70,11 +70,11 @@ async def cute(client, message):
 
 __HELP__ = """  
 *To check your current state:*  
-➻ /horny 🦄 : Check your current horniness level  
-➻ /gay 🌈 : Check your current gayness level  
-➻ /lesbian 🏳️‍🌈 : Check your current lesbian level  
-➻ /boobs 🍈🍈 : Check your current boob size  
-➻ /cute 🥰 : Check your current cuteness level  
+๏ /horny 🦄 : Check your current horniness level  
+๏ /gay 🌈 : Check your current gayness level  
+๏ /lesbian 🏳️‍🌈 : Check your current lesbian level  
+๏ /boobs 🍈🍈 : Check your current boob size  
+๏ /cute 🥰 : Check your current cuteness level  
 """
 __MODULE__= "Sᴇᴍxʏ"
 
