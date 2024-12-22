@@ -29,14 +29,11 @@ from Merisa.utils.stickersets import (
     get_sticker_set_by_name,
 )
 
-__MODULE__ = "Stickers"
+__MODULE__ = "Sᴛɪᴄᴋᴇʀs"
 __HELP__ = """
-/sticker_id
-    To get FileID of a Sticker.
-/get_sticker
-    To get sticker as a photo and document.
-/kang
-    To kang a Sticker or an Image."""
+๏ /sticker_id ➥ To get FileID of a Sticker.
+๏ /get_sticker ➥To get sticker as a photo and document.
+๏ /kang  ➥To kang a Sticker or an Image."""
 
 MAX_STICKERS = (
     120  # would be better if we could fetch this limit directly from telegram
