@@ -11,7 +11,7 @@ from Merisa.utils import adminsOnly
 from Merisa.modules.admins import list_admins
 from Merisa.utils.functions import get_urls_from_text
 
-__MODULE__ = "Locks"
+__MODULE__ = "ʟᴏᴄᴋs"
 __HELP__ = """
 Locks
 
