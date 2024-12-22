@@ -194,12 +194,11 @@ async def style(c, m:CallbackQuery):
 __HELP__ = """
 
 *To Create Figlet Text:*  
-✦ /figlet 📝 : Turn your text into Figlet artwork. Use /figlet Hello to see it in action!  
-✦ /figletfonts 📜 : View all fonts.  
-✦ /figletstyles 🎨 : Check available styles.  
- 
- ❍ /fonts <text> *:* ᴄᴏɴᴠᴇʀᴛs sɪᴍᴩʟᴇ ᴛᴇxᴛ ᴛᴏ ʙᴇᴀᴜᴛɪғᴜʟ ᴛᴇxᴛ ʙʏ ᴄʜᴀɴɢɪɴɢ ɪᴛ's ғᴏɴᴛ.
- ➻ /carbon :ᴍᴀᴋᴇs ᴄᴀʀʙᴏɴ ɪғ ʀᴇᴩʟɪᴇᴅ ᴛᴏ ᴀ ᴛᴇxᴛ.
+๏ /figlet 📝 : Turn your text into Figlet artwork. Use /figlet Hello to see it in action!  
+๏ /figletfonts 📜 : View all fonts.  
+๏ /figletstyles 🎨 : Check available styles.  
+๏ /fonts <text> *:* ᴄᴏɴᴠᴇʀᴛs sɪᴍᴩʟᴇ ᴛᴇxᴛ ᴛᴏ ʙᴇᴀᴜᴛɪғᴜʟ ᴛᴇxᴛ ʙʏ ᴄʜᴀɴɢɪɴɢ ɪᴛ's ғᴏɴᴛ.
+๏ /carbon :ᴍᴀᴋᴇs ᴄᴀʀʙᴏɴ ɪғ ʀᴇᴩʟɪᴇᴅ ᴛᴏ ᴀ ᴛᴇxᴛ.
  """
 
 __MODULE__ = "Text"
