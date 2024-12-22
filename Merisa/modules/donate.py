@@ -1,6 +1,5 @@
 from pyrogram import Client, filters, types
-from Merisa import QuntamBot as app
-
+from Merisa import QuantamBot as app
 
 @app.on_message(filters.command("donate"))
 async def message_handler(client: Client, message: types.Message):
