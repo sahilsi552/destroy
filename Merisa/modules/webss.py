@@ -134,4 +134,4 @@ __HELP__ = """
 ๏ /webss_status : Checks the status of the screenshot service.  
 ๏ /webss_help : Shows this help message.  
 """  
-__MODULE__ = "𝙒𝙚𝙗𝙋𝙞𝙘" 
+__MODULE__ = "ᴡᴇʙ-sʜᴏᴛ" 
