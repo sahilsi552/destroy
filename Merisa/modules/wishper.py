@@ -1,6 +1,5 @@
 import shortuuid
 from pymongo import MongoClient
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultArticle, filters
 from config import MONGO_DATABASE_URI
 from Merisa import QuantamBot as app
 from pyrogram import filters
