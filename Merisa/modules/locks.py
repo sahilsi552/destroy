@@ -13,17 +13,24 @@ from Merisa.utils.functions import get_urls_from_text
 
 __MODULE__ = "Locks"
 __HELP__ = """
-Commands: /lock | /unlock | /locks [No Parameters Required]
+Locks
 
-Parameters:
-    messages | stickers | gifs | media | games | polls
+Description:
+Do stickers annoy you? Or want to avoid people sharing links? Or pictures?
+You're in the right place!
 
-    inline  | url | group_info | user_add | pin
+The locks module allows you to lock away some common items in the 
+Telegram world; our bot will automatically delete them!
 
-You can only pass the "all" parameter with /lock, not with /unlock
+────────────────────────
 
-Example:
-    /lock all
+Commands:
+
+The Following Commands Are Admin Only:
+๏ /lock type: Lock items of a certain type.  
+๏ /unlock type: Unlock items of a certain type.  
+๏ /locks: The current list of locks in this chat.  
+๏ /locktypes: A list of all the available lock types.  
 """
 
 incorrect_parameters = "Incorrect Parameters, Check Locks Section In Help."
