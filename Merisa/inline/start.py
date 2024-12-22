@@ -39,17 +39,17 @@ def private_panel2():
                         InlineKeyboardButton(text="Mᴜsɪᴄ 🎧", callback_data="Music_")
                     ],
                     [
-                        InlineKeyboardButton(text="💁 Bᴀsɪᴄ ", callback_data="basic_help"),
+                        InlineKeyboardButton(text="🌐 Bᴀsɪᴄ ", callback_data="basic_help"),
                         InlineKeyboardButton(text="Exᴘᴇʀᴛ 👮", callback_data="expert_help")
                     ],
                     [
-                        InlineKeyboardButton(text="🍹 Aᴅᴠᴀɴᴄᴇ", callback_data="advance_help"),
-                        InlineKeyboardButton(text=" UsᴇʀBᴏᴛ", callback_data="userbot_help"),
+                        InlineKeyboardButton(text="♻️ Aᴅᴠᴀɴᴄᴇ", callback_data="advance_help"),
+                        InlineKeyboardButton(text="💡 UsᴇʀBᴏᴛ", callback_data="userbot_help"),
                         
                     ],
                     
-                    [ InlineKeyboardButton(text="Dᴏɴᴀᴛɪᴏɴ 🎉", callback_data="donation_help"),
-                     InlineKeyboardButton(text="• Hᴏᴍᴇ •", callback_data="semxx")]
+                    [ InlineKeyboardButton(text="• Hᴏᴍᴇ •", callback_data="semxx")
+                    ],
                 ]
             )
     return reply_markup
