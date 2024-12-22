@@ -1,6 +1,6 @@
 from pyrogram import *
 import requests as re
-from QuantumBot import app, 
+from Merisa import QuantamBot as app
 from pyrogram.types import InlineKeyboardButton,InlineKeyboardMarkup
 import wget
 import os 
@@ -30,11 +30,12 @@ email=''
 async def start_msg(client,message):
     await message.reply("**Gᴇɴᴇʀᴀᴛᴇ ᴀ Eᴍᴀɪʟ Nᴏᴡ❕**",
                         reply_markup=buttons)
-@pbot.on_callback_query()
+@app.on_callback_query()
 async def mailbox(client,message):
     response=message.data
     if response == 'close':
-        await message.edit_message_text('Sᴇssɪᴏɴ Cʟᴏsᴇᴅ 📪')
+      umm = await message.edit_message_text('Sᴇssɪᴏɴ Cʟᴏsᴇᴅ 📪')
+             await umm.delete()
     elif response == 'generate':
         global email
         email = re.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=1").json()[0]
@@ -103,5 +104,5 @@ __HELP__ = """
 ──「 Hᴇʟᴘ ᴏғ TᴇᴍᴘMᴀɪʟ 📩 」── 
 
 Yᴏᴜ ᴄᴀɴ ɢᴇɴᴇʀᴀᴛᴇ Tᴇᴍᴘ-Mᴀɪʟ ғʀᴏᴍ Bᴏᴀ Hᴀɴᴄᴏᴄᴋ
- ❍ /tempmail : Tᴏ ɢᴇᴛ Rᴀɴᴅᴏᴍ Tᴇᴍᴘ-Mᴀɪʟ.
+ ๏ /tempmail : Tᴏ ɢᴇᴛ Rᴀɴᴅᴏᴍ Tᴇᴍᴘ-Mᴀɪʟ.
  """
