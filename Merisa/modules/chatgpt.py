@@ -45,6 +45,6 @@ __MODULE__ = "ChatGPT"
 
 __HELP__ = """
 *Get Assistance on a Query:*
-✦ /gpt : Reply to a message or type your question and let BaBa provide the answer
+๏ /gpt : Reply to a message or type your question and let BaBa provide the answer
 """ 
  
