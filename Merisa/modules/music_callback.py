@@ -366,5 +366,3 @@ Yᴏᴜ ᴄᴀɴ ʜᴇʟᴘ ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ ᴡɪᴛʜ 
             ),
         )
         
-__MODULE__="Music"
-__HELP__=CHANNEL_PLAY+PLAYFORCE
