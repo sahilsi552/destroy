@@ -44,9 +44,9 @@ def extract_urls(reply_markup):
 
 
 
-__MODULE__ = "Filters"
-__HELP__ = """Filters
-
+__MODULE__ = "Fɪʟᴛᴇʀs"
+__HELP__ = """
+Fɪʟᴛᴇʀs
 Description:
 The filters module allows you to set custom filters for your group. When a user sends a message that contains a filter word, the bot will reply with the set reply. Filters can be set to reply with text, media, or buttons.
 
