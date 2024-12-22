@@ -45,20 +45,18 @@ def extract_urls(reply_markup):
 
 
 __MODULE__ = "Filters"
-__HELP__ = """/filters To Get All The Filters In The Chat.
-/filter [FILTER_NAME] To Save A Filter(reply to a message).
+__HELP__ = """Filters
 
-Supported filter types are Text, Animation, Photo, Document, Video, video notes, Audio, Voice.
+Description:
+The filters module allows you to set custom filters for your group. When a user sends a message that contains a filter word, the bot will reply with the set reply. Filters can be set to reply with text, media, or buttons.
 
-To use more words in a filter use.
-`/filter Hey_there` To filter "Hey there".
+────────────────────────
 
-/stop [FILTER_NAME] To Stop A Filter.
-/stopall To delete all the filters in a chat (permanently).
-
-You can use markdown or html to save text too.
-
-Checkout /markdownhelp to know more about formattings and other syntax.
+The Following Commands Are Admin Only:
+๏ /filter keyword reply: Add a filter with the given keyword and reply.  
+๏ /rmfilter keyword: Remove the filter with the given keyword.  
+๏ /filters: List all the filters in the chat.  
+๏ /stopall: Remove all filters in the chat.
 """
 
 
@@ -146,7 +144,7 @@ async def get_filterss(_, message):
     await message.reply_text(msg)
 
 
-@app.on_message(filters.command("stop") & ~filters.private)
+@app.on_message(filters.command("rmfilter") & ~filters.private)
 @adminsOnly("can_change_info")
 async def del_filter(_, message):
     if len(message.command) < 2:
