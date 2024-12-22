@@ -80,12 +80,12 @@ async def unshort(bot, message):
 
 __HELP__ = """
 *To create a shortened URL:*
-✦ /short (URL): Creates a short version of the provided URL. For example:
+๏ /short (URL): Creates a short version of the provided URL. For example:
 `/short https://t.me/text`.
 
 *To unshorten a URL:*
-✦ /unshort (short-URL): Retrieves the original URL from the shortened version. For example:
-`/unshort https://tinyurl.com/example`.
+๏ /unshort (short-URL): Retrieves the original URL from the shortened version. For example:
+ `/unshort https://tinyurl.com/example`.
 """
 
 __MODULE__ = "🐜 Shorten"  
