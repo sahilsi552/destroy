@@ -22,7 +22,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 __MODULE__ = "Shippering"
-__HELP__ = "/Couple - To Choose Couple Of The Day"
+__HELP__ = "๏ /Couple - To Choose Couple Of The Day"
 
 import random
 from datetime import datetime
