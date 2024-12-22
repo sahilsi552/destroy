@@ -65,7 +65,7 @@ sᴛᴀᴛᴜs: {get_user_status()}
 
 
 
-@QuantamBot.on_message(filters.command(["id","chatid"],"."))
+@QuantamBot.on_message(filters.command(["id","chatid"]))
 async def getid(client, message):
     chat = message.chat
     your_id = message.from_user.id

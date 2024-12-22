@@ -23,7 +23,7 @@ from Merisa.inline import (private_panel,
 from config import START_IMG
 @app.on_message(filters.command("music")) 
 async def music_help(b,m):
-    await m.reply_photo(START_IMG,f"""
+    await m.reply_photo(START_IMG,caption=f"""
  ʜᴇʀᴇ ɪꜱ ʜᴇʟᴘ ᴍᴇɴᴜ ꜰᴏʀ ᴍᴜꜱɪᴄ 
 """,
             parse_mode=ParseMode.MARKDOWN,

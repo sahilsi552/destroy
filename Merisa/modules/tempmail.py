@@ -35,7 +35,7 @@ async def mailbox(client,message):
     response=message.data
     if response == 'close':
       umm = await message.edit_message_text('Sᴇssɪᴏɴ Cʟᴏsᴇᴅ 📪')
-             await umm.delete()
+      await umm.delete()
     elif response == 'generate':
         global email
         email = re.get("https://www.1secmail.com/api/v1/?action=genRandomMailbox&count=1").json()[0]
@@ -97,7 +97,6 @@ async def mailbox(client,message):
             filedl=wget.download(attc)
             await message.edit_message_text(mailbox_vieww,reply_markup=buttons)
             os.remove(dlattach)
-
 __MODULE__ = "Temp-mail"
 
 __HELP__ = """

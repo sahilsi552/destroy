@@ -50,12 +50,12 @@ async def private_start(app, message: Message):
             await message.reply_photo(
                 photo=image,
                 caption=TXT,
-                reply_markup=InlineKeyboardMarkup(out),
+                reply_markup=(out),
             )
         except:
             await message.reply_text(
                 text=TXT,
-                reply_markup=InlineKeyboardMarkup(out),
+                reply_markup=(out),
             )
         if await is_on_off(2):
             sender_id = message.from_user.id
