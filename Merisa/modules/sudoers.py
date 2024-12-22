@@ -7,11 +7,11 @@ from Merisa.utils.database import add_sudo, remove_sudo
 from music_text import *
 __MODULE__ = "Sᴜᴅᴏ"
 __HELP__ = """
-/addsudo [ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ʀᴇᴩʟʏ ᴛᴏ ᴀ ᴜsᴇʀ] : ᴀᴅᴅ sᴜᴅᴏ ᴜsᴇʀ
+๏ /addsudo [ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ʀᴇᴩʟʏ ᴛᴏ ᴀ ᴜsᴇʀ] : ᴀᴅᴅ sᴜᴅᴏ ᴜsᴇʀ
 
-/delsudo [ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ʀᴇᴩʟʏ ᴛᴏ ᴀ ᴜsᴇʀ] : ʀᴇᴍᴏᴠᴇ sᴜᴅᴏ ᴜsᴇʀ
+๏ /delsudo [ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ʀᴇᴩʟʏ ᴛᴏ ᴀ ᴜsᴇʀ] : ʀᴇᴍᴏᴠᴇ sᴜᴅᴏ ᴜsᴇʀ
 
-/sudolist : sʜᴏᴡs ᴛʜᴇ sᴜᴅᴏ ᴜsᴇʀs ᴏғ ᴍᴜsɪᴄ ʙᴏᴛ
+๏ /sudolist : sʜᴏᴡs ᴛʜᴇ sᴜᴅᴏ ᴜsᴇʀs ᴏғ ʙᴏᴛ
 """+blockuser
 
 
