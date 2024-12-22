@@ -14,5 +14,3 @@ async def source(_, m):
         caption=SOURCE_TEXT,
         reply_markup=SOURCE_BUTTONS
     )
-__MODULE__="SEEK"
-__HELP__=SEEKBACK
