@@ -88,4 +88,4 @@ __HELP__ = """
  `/unshort https://tinyurl.com/example`.
 """
 
-__MODULE__ = "🐜 Shorten"  
+__MODULE__ = "Sʜᴏʀᴛᴇɴ"  
