@@ -47,8 +47,8 @@ async def wiki(_,m):
 
 
 __HELP__ = """
-» /wiki (text) *:* sᴇᴀʀᴄʜs ᴀʙᴏᴜᴛ ᴛʜᴇ ɢɪᴠᴇɴ ᴛᴇxᴛ ᴏɴ ᴡɪᴋɪᴘᴇᴅɪᴀ.
-➻ /info : ʀᴇᴘʟʏ ᴛᴏ ᴜꜱᴇʀ ᴏʀ ɢɪᴠᴇ [userid|username] ᴛᴏ ɢᴇᴛ ᴜsᴇʀɪɴғᴏ
-✦ /movie : Let BaBa search the movie db for movies ✨  
+๏ /wiki (text) *:* sᴇᴀʀᴄʜs ᴀʙᴏᴜᴛ ᴛʜᴇ ɢɪᴠᴇɴ ᴛᴇxᴛ ᴏɴ ᴡɪᴋɪᴘᴇᴅɪᴀ.
+๏ /info : ʀᴇᴘʟʏ ᴛᴏ ᴜꜱᴇʀ ᴏʀ ɢɪᴠᴇ [userid|username] ᴛᴏ ɢᴇᴛ ᴜsᴇʀɪɴғᴏ
+๏ /movie : Let BaBa search the movie db for movies ✨  
 """
-__MODULE__ = "Informations"
+__MODULE__ = "Iɴғᴏʀᴍᴀᴛɪᴏɴs"
