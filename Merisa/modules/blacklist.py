@@ -18,11 +18,24 @@ from Merisa.utils.database import (
 )
 blacklist_filters_group=2
 
-__MODULE__ = "Blacklist"
+__MODULE__ = "Bʟᴀᴄᴋʟɪsᴛ"
 __HELP__ = """
-/blacklisted - Get All The Blacklisted Words In The Chat.
-/blacklist [WORD|SENTENCE] - Blacklist A Word Or A Sentence.
-/whitelist [WORD|SENTENCE] - Whitelist A Word Or A Sentence.
+ Blacklist
+
+Description:
+This module allows you to blacklist certain words in your chat. When a user sends a message containing a blacklisted word, the bot will take action based on the blacklist mode set for the chat.
+
+────────────────────────
+
+The Following Commands Are Admin Only:
+๏ /blacklist word - Add a word to the blacklist.  
+๏ /whitelist word - Remove a word from the blacklist.  
+๏ /blacklisted - List all blacklisted words in the chat.  
+
+
+────────────────────────
+⚠️ Note:
+- No action for admins, creators, approved users, anonymous channels, or bots.
 """
 
 
