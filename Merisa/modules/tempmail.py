@@ -97,7 +97,7 @@ async def mailbox(client,message):
             filedl=wget.download(attc)
             await message.edit_message_text(mailbox_vieww,reply_markup=buttons)
             os.remove(dlattach)
-__MODULE__ = "Tᴇᴍʟ-ᴍᴀɪʟ"
+__MODULE__ = "ᴛᴇᴍᴘ-ᴍᴀɪʟ"
 
 __HELP__ = """
 ──「 Hᴇʟᴘ ᴏғ TᴇᴍᴘMᴀɪʟ 📩 」── 
