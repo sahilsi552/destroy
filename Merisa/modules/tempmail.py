@@ -1,6 +1,6 @@
 from pyrogram import *
 import requests as re
-from MukeshRobot import pbot, config
+from Quantumbot import app, 
 from pyrogram.types import InlineKeyboardButton,InlineKeyboardMarkup
 import wget
 import os 
@@ -26,7 +26,7 @@ msg_buttons=InlineKeyboardMarkup(
 
 
 email=''
-@pbot.on_message(filters.command('tempmail'))
+@app.on_message(filters.command('tempmail'))
 async def start_msg(client,message):
     await message.reply("**Gᴇɴᴇʀᴀᴛᴇ ᴀ Eᴍᴀɪʟ Nᴏᴡ❕**",
                         reply_markup=buttons)
