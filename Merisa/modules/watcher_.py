@@ -223,5 +223,3 @@ async def chat_watcher_func(_, message):
         except:
             return
 from music_text import *
-__MODULE__="AUTH"
-__HELP__=auth
