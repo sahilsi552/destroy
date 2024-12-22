@@ -43,20 +43,20 @@ async def totranslate(b,m):
 
 
 __HELP__ = """
- ❍ /tr  (ʟᴀɴɢᴜᴀɢᴇ ᴄᴏᴅᴇ) ᴀs ʀᴇᴘʟʏ ᴛᴏ ᴀ ʟᴏɴɢ ᴍᴇssᴀɢᴇ
+ ๏ /tr  (ʟᴀɴɢᴜᴀɢᴇ ᴄᴏᴅᴇ) ᴀs ʀᴇᴘʟʏ ᴛᴏ ᴀ ʟᴏɴɢ ᴍᴇssᴀɢᴇ
 *ᴇxᴀᴍᴘʟᴇ:* 
- ❍ /tr en*:* ᴛʀᴀɴsʟᴀᴛᴇs sᴏᴍᴇᴛʜɪɴɢ ᴛᴏ ᴇɴɢʟɪsʜ
- ❍ /tr hi-en*:* ᴛʀᴀɴsʟᴀᴛᴇs ʜɪɴᴅɪ ᴛᴏ ᴇɴɢʟɪsʜ
+ ๏ /tr en*:* ᴛʀᴀɴsʟᴀᴛᴇs sᴏᴍᴇᴛʜɪɴɢ ᴛᴏ ᴇɴɢʟɪsʜ
+ ๏ /tr hi-en*:* ᴛʀᴀɴsʟᴀᴛᴇs ʜɪɴᴅɪ ᴛᴏ ᴇɴɢʟɪsʜ
 see : https://justpaste.it/em9iq
-➻ /paste  : ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴛᴇxᴛ ғɪʟᴇ
-➻ /shorturl : sʜᴏʀᴛᴇɴs ᴛʜᴇ ɢɪᴠᴇɴ ᴜʀʟ.
-➻ /unshorturl : ᴜɴsʜᴏʀᴛᴇɴs ᴛʜᴇ ɢɪᴠᴇɴ ᴜʀʟ
-*🔮 Spells of Text Conversion:*  
-✦ /encrypt 🔒: {COMMANDS['encrypt']}  
-✦ /decrypt 🔓: {COMMANDS['decrypt']}  
-✦ /hash 🔑: {COMMANDS['hash']}  
-✦ /reverse 🔄: {COMMANDS['reverse']}  
-➻ /img : sʜᴏᴡs ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴛʜᴇ ʀᴇᴘʟɪᴇᴅ ɪᴍᴀɢᴇ.
+ ๏ /paste  : ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴛᴇxᴛ ғɪʟᴇ
+ ๏ /shorturl : sʜᴏʀᴛᴇɴs ᴛʜᴇ ɢɪᴠᴇɴ ᴜʀʟ.
+ ๏ /unshorturl : ᴜɴsʜᴏʀᴛᴇɴs ᴛʜᴇ ɢɪᴠᴇɴ ᴜʀʟ
+ ➻ 🔮 Spells of Text Conversion:*  
+ ๏ /encrypt 🔒: {COMMANDS['encrypt']}  
+ ๏ /decrypt 🔓: {COMMANDS['decrypt']}  
+ ๏ /hash 🔑: {COMMANDS['hash']}  
+ ๏ /reverse 🔄: {COMMANDS['reverse']}  
+ ๏ /img : sʜᴏᴡs ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴛʜᴇ ʀᴇᴘʟɪᴇᴅ ɪᴍᴀɢᴇ.
 """
-__MODULE__ = "Gadgets"
+__MODULE__ = "Gᴀᴅɢᴇᴛs"
 
