@@ -250,16 +250,16 @@ async def ranking_faq(client, message: Message):
     )  
     await message.reply_text(response)  
 
-__MODULE__ = "📈 Rankings"  
+__MODULE__ = "Rᴀɴᴋɪɴɢs"  
 
 __HELP__ = """  
-✨ /overall *➥* Feeler lucky? Check the top discussers on the overall leaderboard!   
+๏ /overall *➥* Feeler lucky? Check the top discussers on the overall leaderboard!   
 
-✨ /recent *➥* Discover activity: today, this week, or this month.  
+๏ /recent *➥* Discover activity: today, this week, or this month.  
 
-✨ /ranking *➥* Check your user ranking score.  
+๏ /ranking *➥* Check your user ranking score.  
 
-✨ /daily *➥* Attempt today's challenge!  
+๏ /daily *➥* Attempt today's challenge!  
 """  
 
 user_data: Dict[int, Dict[int, int]] = {}
