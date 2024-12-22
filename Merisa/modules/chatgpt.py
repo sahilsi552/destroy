@@ -41,7 +41,7 @@ async def _AiCmds(_, message):
          text = response.json()['reply']
          return await msg.edit_text(text)
 
-__MODULE__ = "ChatGPT"  
+__MODULE__ = "Cʜᴀᴛɢᴘᴛ"  
 
 __HELP__ = """
 *Get Assistance on a Query:*
