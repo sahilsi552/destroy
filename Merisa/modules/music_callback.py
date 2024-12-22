@@ -254,11 +254,12 @@ async def advance_callback(bot, query):
                     ],
                     [
                         InlineKeyboardButton(text="🍹 Aᴅᴠᴀɴᴄᴇ", callback_data="advance_help"),
-                        InlineKeyboardButton(text=" UsᴇʀBᴏᴛ", callback_data="userbot_help"),
+                        InlineKeyboardButton(text="🤖 UsᴇʀBᴏᴛ", callback_data="userbot_help"),
                         
                     ],
-                    [InlineKeyboardButton(text="Dᴏɴᴀᴛɪᴏɴ 🎉", callback_data="donation_help") ,
-                     InlineKeyboardButton(text="• Hᴏᴍᴇ •", callback_data="semxx")]
+                    [
+                     InlineKeyboardButton(text="• Hᴏᴍᴇ •", callback_data="semxx")
+                    ], 
                 ]
             ),
         )
