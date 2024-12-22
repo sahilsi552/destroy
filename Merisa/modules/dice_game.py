@@ -160,4 +160,4 @@ __HELP__ = """
 ๏ /resetleaderboard 🔄 : Reset the leaderboard for a fresh start  
 """  
 
-__MODULE__ = "Match"
+__MODULE__ = "ᴍᴀᴛᴄʜ"
