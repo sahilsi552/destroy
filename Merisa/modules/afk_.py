@@ -11,7 +11,17 @@ from ..database import add_afk, is_afk, remove_afk
 
 __MODULE__ = "Aғᴋ"
 __HELP__ = """
-/afk - ᴀᴡᴀʏ ғʀᴏᴍ ᴋᴇʏʙᴏᴀʀᴅ
+Afk
+
+Description :
+When someone mentions you in a chat, the user will be notified you are AFK. You can even provide a reason for going AFK, which will be provided to the user as well.
+────────────────────────
+
+User Commands :
+๏ /afk: This will set you offline.
+๏ /afk reason: This will set you offline with a reason.
+๏ /afk replied to a sticker/photo: This will set you offline with an image or sticker.
+๏ /afk replied to a sticker/photo reason: This will set you AFK with an image and reason both.
 """
 def get_readable_time(seconds: int) -> str:
     count = 0
