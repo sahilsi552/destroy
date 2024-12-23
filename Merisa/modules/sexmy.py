@@ -38,16 +38,41 @@ class Whispers:
         whisper = collection.find_one({"WhisperId": whisper_id})
         return whisper["whisperData"] if whisper else None
 
+# Function to extract mention based on query
+def extract_mention(query, user_id, user_name):
+    # Check if the query is non-empty
+    if query:
+        # Remove extra spaces and extract the target name
+        target_name = query.strip()  
+        mention = f"[{target_name}](tg://user?id={user_id})"
+    else:
+        # Default to the user who sent the query
+        mention = f"[{user_name}](tg://user?id={user_id})"  
+    
+    return mention
+
 # Inline query handler
 @app.on_inline_query()
 async def handle_inline_query(client, inline_query: InlineQuery):
     query = inline_query.query.strip()
     user_id = inline_query.from_user.id
     user_name = inline_query.from_user.first_name
-    mention = f"[{user_name}](tg://user?id={user_id})"  # Mention sender's name
+    
+    # Extract mention using the function
+    mention = extract_mention(query, user_id, user_name)
+    
+    # User who invoked the query
+    print(f"Received inline query: '{query}' with mention '{mention}'")
 
-    # Debug to trace query
-    print(f"Received inline query: '{query}'")
+    # Check if the query is in the form of @botusername <someone name>
+    if query.startswith("@") and " " in query:
+        parts = query.split(" ", 1)
+        query_name = parts[1].strip()  # The name after @botusername
+    else:
+        query_name = query  # Fallback to the original query if no name is given
+
+    # Debugging the received query
+    print(f"Received inline query: '{query}' with name '{query_name}'")
 
     # Whisper functionality
     if query.startswith("@") or query.isdigit():
@@ -101,15 +126,15 @@ async def handle_inline_query(client, inline_query: InlineQuery):
         ]
         await client.answer_inline_query(inline_query.id, answers, cache_time=1, is_personal=True)
     else:
-        # Random Inline Responses
-        results = generate_random_responses(mention, query)
+        # Random Inline Responses with Marriage Probability
+        results = generate_random_responses(mention, user_name, query_name)  # Use query_name for responses
         if not results:
             await inline_query.answer([], cache_time=1, is_personal=True)
             return
         await inline_query.answer(results, cache_time=1, is_personal=True)
 
-# Generate random inline responses
-def generate_random_responses(mention, query):
+# Generate random inline responses including marriage probability
+def generate_random_responses(mention, user_name, query_name):
     mm = random.randint(1, 100)
     cm = random.randint(5, 30)
     marriage_prob = random.randint(1, 100)
@@ -129,7 +154,7 @@ def generate_random_responses(mention, query):
         {
             "title": "Marriage Probability",
             "description": "Check your marriage probability with someone!",
-            "text": f"💍 Marriage probability of {mention} with '{query or 'someone'}' is {marriage_prob}%.",
+            "text": f"💍 Marriage probability of {mention} with {query_name} is {marriage_prob}%.",
         },
         {
             "title": "Name Starts With",
