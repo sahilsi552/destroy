@@ -7,19 +7,19 @@ THUMB_URL = "https://i.ibb.co/Dgd586R/file-5790.jpg"
 
 BUTTON = [[InlineKeyboardButton("🔍 Check Your Result", switch_inline_query_current_chat="")]]
 
-
 @app.on_inline_query()
 async def inline_queries(client, inline_query):
     user_id = inline_query.from_user.id
     user_name = inline_query.from_user.first_name
     query = inline_query.query.strip()
 
-    # If a query is provided, use it as the target name
+    # If a query is provided, use it as the target name; otherwise, set a default
     if query:
         target_name = query
-        mention = f"[{target_name}](tg://user?id={user_id})"
     else:
-        mention = f"[{user_name}](tg://user?id={user_id})"  # Default to the sender's name
+        target_name = "someone"
+
+    mention = f"[{user_name}](tg://user?id={user_id})"  # Mention sender's name
 
     # Randomly generated values
     mm = random.randint(1, 100)  # Random percentage
@@ -44,7 +44,7 @@ async def inline_queries(client, inline_query):
         {
             "title": "Marriage Probability",
             "description": "Check your marriage probability with someone!",
-            "text": f"💍 Marriage probability of {mention} with '{query}' is {marriage_prob}%.",
+            "text": f"💍 Marriage probability of {mention} with '{target_name}' is {marriage_prob}%.",
         },
         {
             "title": "Name Starts With",
