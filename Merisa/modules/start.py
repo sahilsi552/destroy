@@ -36,7 +36,7 @@ async def private_start(app, message: Message):
                 f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>ᴛʀᴀᴄᴋ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b>\n\n<b>ᴜsᴇʀ ɪᴅ:</b> {sender_id}\n<b>ᴜsᴇʀɴᴀᴍᴇ:</b> {sender_name}",
             )
     else:
-        out = private_panel2()
+        out = private_panel()
         image = config.START_IMG
         TXT = f""" Hello {message.from_user.mention} 🥀.
 
@@ -50,12 +50,12 @@ async def private_start(app, message: Message):
             await message.reply_photo(
                 photo=image,
                 caption=TXT,
-                reply_markup=(out),
+                reply_markup=InlineKeyboardMarkup(out),
             )
         except:
             await message.reply_text(
                 text=TXT,
-                reply_markup=(out),
+                reply_markup=InlineKeyboardMarkup(out),
             )
         if await is_on_off(2):
             sender_id = message.from_user.id
