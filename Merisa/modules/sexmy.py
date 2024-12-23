@@ -40,15 +40,9 @@ class Whispers:
 
 # Function to extract mention based on query
 def extract_mention(query, user_id, user_name):
-    # Check if the query is non-empty
-    if query:
-        # Remove extra spaces and extract the target name
-        target_name = query.strip()  
-        mention = f"[{user_name}](tg://user?id={user_id})"
-    else:
-        # Default to the user who sent the query
-        mention = f"[{user_name}](tg://user?id={user_id})"  
-    
+    query = query.strip() if query else ""
+    target_name = query if query else user_name
+    mention = f"[{user_name}](tg://user?id={user_id})"
     return mention, target_name
 
 # Inline query handler
@@ -57,12 +51,16 @@ async def handle_inline_query(client, inline_query: InlineQuery):
     query = inline_query.query.strip()
     user_id = inline_query.from_user.id
     user_name = inline_query.from_user.first_name
-    
-    # Extract mention using the function
+
+    # Debugging input
+    print(f"Debug: query='{query}', user_id='{user_id}', user_name='{user_name}'")
+
+    # Extract mention and target name
     mention, target_name = extract_mention(query, user_id, user_name)
-    
-    # Debugging the received query
-    print(f"Received inline query: '{query}' with target '{target_name}'")
+
+    if not query:  # Handle empty queries
+        await inline_query.answer([], cache_time=1, is_personal=True)
+        return
 
     # Whisper functionality
     if query.startswith("@") or query.isdigit():
