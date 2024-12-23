@@ -139,7 +139,12 @@ async def locks_func(_, message):
         )
         await message.reply(f"Unlocked Everything in {message.chat.title}")
 
-
+@app.on_message(filters.command("locktypes")& filters.private)
+async def lock_all(_,m):
+    all_text=""
+    for i in data:
+        all_text+=f"**{i}** : {data[i]}\n"
+    await m.reply_text(all_text)
 @app.on_message(filters.command("locks") & ~filters.private)
 @capture_err
 async def locktypes(_, message):
