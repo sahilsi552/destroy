@@ -20,6 +20,7 @@ collection = db["whisper"]
 
 # Constants
 THUMB_URL = "https://i.ibb.co/Dgd586R/file-5790.jpg"
+WHISPER_THUMB_URL = "https://i.ibb.co/YkCmFJ4/whisper-thumb.jpg"  # Custom thumbnail for whispers
 BUTTON = [[InlineKeyboardButton("🔍 Check Your Result", switch_inline_query_current_chat="")]]
 
 # Whispers class for database operations
@@ -40,15 +41,11 @@ class Whispers:
 
 # Function to extract mention based on query
 def extract_mention(query, user_id, user_name):
-    # Check if the query is non-empty
     if query:
-        # Remove extra spaces and extract the target name
-        target_name = query.strip()  
+        target_name = query.strip()
         mention = f"[{target_name}](tg://user?id={user_id})"
     else:
-        # Default to the user who sent the query
-        mention = f"[{user_name}](tg://user?id={user_id})"  
-    
+        mention = f"[{user_name}](tg://user?id={user_id})"
     return mention
 
 # Inline query handler
@@ -58,23 +55,9 @@ async def handle_inline_query(client, inline_query: InlineQuery):
     user_id = inline_query.from_user.id
     user_name = inline_query.from_user.first_name
     
-    # Extract mention using the function
     mention = extract_mention(query, user_id, user_name)
-    
-    # User who invoked the query
-    print(f"Received inline query: '{query}' with mention '{mention}'")
+    results = []
 
-    # Check if the query is in the form of @botusername <someone name>
-    if query.startswith("@") and " " in query:
-        parts = query.split(" ", 1)
-        query_name = parts[1].strip()  # The name after @botusername
-    else:
-        query_name = query  # Fallback to the original query if no name is given
-
-    # Debugging the received query
-    print(f"Received inline query: '{query}' with name '{query_name}'")
-
-    # Whisper functionality
     if query.startswith("@") or query.isdigit():
         user, message = parse_user_message(query)
         if len(message) > 200:
@@ -83,7 +66,6 @@ async def handle_inline_query(client, inline_query: InlineQuery):
 
         user_type = "username" if user.startswith("@") else "id"
 
-        # Fetch chat details for IDs
         if user.isdigit():
             try:
                 chat = await client.get_chat(int(user))
@@ -100,11 +82,9 @@ async def handle_inline_query(client, inline_query: InlineQuery):
         }
         whisper_id = shortuuid.uuid()
 
-        # Add whisper to the database
         Whispers.add_whisper(whisper_id, whisper_data)
 
-        # Create Whisper Inline Result
-        answers = [
+        results.append(
             InlineQueryResultArticle(
                 id=whisper_id,
                 title=f"👤 Send a whisper message to {user}!",
@@ -122,16 +102,17 @@ async def handle_inline_query(client, inline_query: InlineQuery):
                         ]
                     ]
                 ),
+                thumb_url=WHISPER_THUMB_URL,  # Custom image for whispers
             )
-        ]
-        await client.answer_inline_query(inline_query.id, answers, cache_time=1, is_personal=True)
+        )
     else:
-        # Random Inline Responses with Marriage Probability
-        results = generate_random_responses(mention, user_name, query_name)  # Use query_name for responses
-        if not results:
-            await inline_query.answer([], cache_time=1, is_personal=True)
-            return
+        random_responses = generate_random_responses(mention, user_name, query)
+        results.extend(random_responses)
+
+    if results:
         await inline_query.answer(results, cache_time=1, is_personal=True)
+    else:
+        await inline_query.answer([], cache_time=1, is_personal=True)
 
 # Generate random inline responses including marriage probability
 def generate_random_responses(mention, user_name, query_name):
@@ -140,15 +121,10 @@ def generate_random_responses(mention, user_name, query_name):
     marriage_prob = random.randint(1, 100)
     name_start = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
-    # Check if query_name has more than one part (i.e., a double name)
-    query_name_parts = query_name.split()
-    if len(query_name_parts) > 1:
-        # If it's a double name, use both parts for a more personalized marriage probability
-        full_name = " ".join(query_name_parts)
-        marriage_message = f"💍 Marriage probability of {mention} with {full_name} is {marriage_prob}%."
-    else:
-        # Single name scenario
-        marriage_message = f"💍 Marriage probability of {mention} with {query_name} is {marriage_prob}%."
+    marriage_message = (
+        f"💍 Marriage probability of {mention} with [{query_name}](tg://user?id={inline_query.from_user.id}) is {marriage_prob}%."
+        if query_name else f"💍 Marriage probability of {mention} is {marriage_prob}%."
+    )
 
     random_responses = [
         {
@@ -164,7 +140,7 @@ def generate_random_responses(mention, user_name, query_name):
         {
             "title": "Marriage Probability",
             "description": "Check your marriage probability with someone!",
-            "text": marriage_message,  # Updated marriage message
+            "text": marriage_message,
         },
         {
             "title": "Name Starts With",
@@ -200,13 +176,14 @@ def generate_random_responses(mention, user_name, query_name):
 
     return [
         InlineQueryResultArticle(
+            id=shortuuid.uuid(),
             title=response["title"],
             description=response["description"],
             input_message_content=InputTextMessageContent(
                 response["text"], disable_web_page_preview=True
             ),
             reply_markup=InlineKeyboardMarkup(BUTTON),
-            thumb_url=THUMB_URL,
+            thumb_url=THUMB_URL,  # Thumbnail for random responses
         )
         for response in random_responses
     ]
