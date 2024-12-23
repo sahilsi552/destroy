@@ -105,7 +105,7 @@ async def bot_Send_msg(_, message):
                 await _.send_chat_action(message.chat.id, ChatAction.TYPING)
                 output=requests.get("https://sugoi-api.vercel.app/chat?msg="+message.text).json()["response"]
                 
-                await message.reply_text(text=output["results"],quote=True)
+                await message.reply_text(text=output,quote=True)
     except:
         pass
     try:
