@@ -14,9 +14,6 @@ from Merisa.database import is_served_user
 #blackbox
 @QuantamBot.on_message(filters.command(["blackbox"],  prefixes=["+", ".", "/", "-", "?", "$","#","&"]))
 async def blackbox_chat(bot, message):
-    x=await is_served_user(message.from_user.id)
-    if x==False:
-        return await message.reply("you are not verifed user start me in pm to verfiy",reply_markup=VERIFY)
     await bot.send_chat_action(message.chat.id, ChatAction.TYPING)
     try:
         a=await question(message)
