@@ -10,8 +10,6 @@ from .. import QuantamBot
 from config import *
 from MukeshAPI import api
 from Merisa.modules.many_extra import question
-from telegraph import Telegraph
-from Merisa.modules.telegrph_ import graph_img,resize_image
 from Merisa.utils.button_help import *
 from Merisa.database import is_served_user
 @QuantamBot.on_edited_message(
