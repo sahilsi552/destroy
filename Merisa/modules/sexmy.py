@@ -40,16 +40,20 @@ class Whispers:
 
 # Inline query handler
 @app.on_inline_query()
-async def handle_inline_query(client, inline_query):
+async def handle_inline_query(client, inline_query: InlineQuery):
     query = inline_query.query.strip()
     user_id = inline_query.from_user.id
     user_name = inline_query.from_user.first_name
     mention = f"[{user_name}](tg://user?id={user_id})"  # Mention sender's name
 
-    # Check if the query contains "@username" or an ID for Whisper
+    # Debug to trace query
+    print(f"Received inline query: '{query}'")
+
+    # Whisper functionality
     if query.startswith("@") or query.isdigit():
         user, message = parse_user_message(query)
         if len(message) > 200:
+            await inline_query.answer([], cache_time=1, is_personal=True)
             return
 
         user_type = "username" if user.startswith("@") else "id"
@@ -59,8 +63,8 @@ async def handle_inline_query(client, inline_query):
             try:
                 chat = await client.get_chat(int(user))
                 user = f"@{chat.username}" if chat.username else chat.first_name
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"Error fetching chat details: {e}")
 
         whisper_data = {
             "user": inline_query.from_user.id,
@@ -95,79 +99,82 @@ async def handle_inline_query(client, inline_query):
                 ),
             )
         ]
-        await client.answer_inline_query(inline_query.id, answers)
+        await client.answer_inline_query(inline_query.id, answers, cache_time=1, is_personal=True)
     else:
-        # Generate Random Inline Responses
-        results = []
-
-        # Randomly generated values
-        mm = random.randint(1, 100)
-        cm = random.randint(5, 30)
-        marriage_prob = random.randint(1, 100)
-        name_start = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-
-        # List of responses
-        random_responses = [
-            {
-                "title": "Horny Level",
-                "description": "Check how horny you are!",
-                "text": f"🔥 {mention} is {mm}% horny!",
-            },
-            {
-                "title": "Gayness Level",
-                "description": "Check how gay you are!",
-                "text": f"🍷 {mention} is {mm}% gay!",
-            },
-            {
-                "title": "Marriage Probability",
-                "description": "Check your marriage probability with someone!",
-                "text": f"💍 Marriage probability of {mention} with '{query or 'someone'}' is {marriage_prob}%.",
-            },
-            {
-                "title": "Name Starts With",
-                "description": "Find out which letter your name starts with!",
-                "text": f"🔠 Your name starts with the letter '{name_start}'.",
-            },
-            {
-                "title": "Dick Size",
-                "description": "Check the size of your dick!",
-                "text": f"🍌 {mention}'s dick size is {cm} cm!",
-            },
-            {
-                "title": "Vagina Depth",
-                "description": "Check the depth of your vagina!",
-                "text": f"🌹 {mention}'s vagina depth is {cm} cm!",
-            },
-            {
-                "title": "Hotness Level",
-                "description": "Check how hot you are!",
-                "text": f"🔥 {mention} is {mm}% hot!",
-            },
-            {
-                "title": "MC Level",
-                "description": "Check your MC level!",
-                "text": f"⚡ {mention} is {mm}% MC!",
-            },
-            {
-                "title": "BC Level",
-                "description": "Check your BC level!",
-                "text": f"⚡ {mention} is {mm}% BC!",
-            },
-        ]
-
-        for response in random_responses:
-            results.append(
-                InlineQueryResultArticle(
-                    title=response["title"],
-                    description=response["description"],
-                    input_message_content=InputTextMessageContent(
-                        response["text"], disable_web_page_preview=True
-                    ),
-                    reply_markup=InlineKeyboardMarkup(BUTTON),
-                    thumb_url=THUMB_URL,
-                )
-            )
+        # Random Inline Responses
+        results = generate_random_responses(mention, query)
+        if not results:
+            await inline_query.answer([], cache_time=1, is_personal=True)
+            return
         await inline_query.answer(results, cache_time=1, is_personal=True)
+
+# Generate random inline responses
+def generate_random_responses(mention, query):
+    mm = random.randint(1, 100)
+    cm = random.randint(5, 30)
+    marriage_prob = random.randint(1, 100)
+    name_start = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+    random_responses = [
+        {
+            "title": "Horny Level",
+            "description": "Check how horny you are!",
+            "text": f"🔥 {mention} is {mm}% horny!",
+        },
+        {
+            "title": "Gayness Level",
+            "description": "Check how gay you are!",
+            "text": f"🍷 {mention} is {mm}% gay!",
+        },
+        {
+            "title": "Marriage Probability",
+            "description": "Check your marriage probability with someone!",
+            "text": f"💍 Marriage probability of {mention} with '{query or 'someone'}' is {marriage_prob}%.",
+        },
+        {
+            "title": "Name Starts With",
+            "description": "Find out which letter your name starts with!",
+            "text": f"🔠 Your name starts with the letter '{name_start}'.",
+        },
+        {
+            "title": "Dick Size",
+            "description": "Check the size of your dick!",
+            "text": f"🍌 {mention}'s dick size is {cm} cm!",
+        },
+        {
+            "title": "Vagina Depth",
+            "description": "Check the depth of your vagina!",
+            "text": f"🌹 {mention}'s vagina depth is {cm} cm!",
+        },
+        {
+            "title": "Hotness Level",
+            "description": "Check how hot you are!",
+            "text": f"🔥 {mention} is {mm}% hot!",
+        },
+        {
+            "title": "MC Level",
+            "description": "Check your MC level!",
+            "text": f"⚡ {mention} is {mm}% MC!",
+        },
+        {
+            "title": "BC Level",
+            "description": "Check your BC level!",
+            "text": f"⚡ {mention} is {mm}% BC!",
+        },
+    ]
+
+    return [
+        InlineQueryResultArticle(
+            title=response["title"],
+            description=response["description"],
+            input_message_content=InputTextMessageContent(
+                response["text"], disable_web_page_preview=True
+            ),
+            reply_markup=InlineKeyboardMarkup(BUTTON),
+            thumb_url=THUMB_URL,
+        )
+        for response in random_responses
+    ]
 
 def parse_user_message(query_text):
     text = query_text.split(" ")
@@ -197,4 +204,3 @@ async def show_whisper(client, callback_query):
         await client.answer_callback_query(callback_query.id, whisper["message"], show_alert=True)
     else:
         await client.answer_callback_query(callback_query.id, "Not your Whisper!", show_alert=True)
-      
