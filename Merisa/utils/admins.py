@@ -1,6 +1,6 @@
 from pyrogram.enums import ChatMembersFilter
 from Merisa import QuantamBot as app
-from config import OWNER_ID
+from config import OWNER_ID,SUDOERS
 from pyrogram.types import Message
 from functools import wraps
 from traceback import format_exc as err
@@ -103,7 +103,7 @@ def adminsOnly(permission):
                 return await unauthorised(message, permission, subFunc)
             userID = message.from_user.id
             permissions = await member_permissions(chatID, userID)
-            if userID not in OWNER_ID and permission not in permissions:
+            if userID not in SUDOERS and permission not in permissions:
                 return await unauthorised(message, permission, subFunc)
             return await authorised(func, subFunc, client, message, *args, **kwargs)
 
@@ -125,7 +125,7 @@ def ownerOnly(permission):
                 return await unauthorised(message, permission, subFunc2)
             userID = message.from_user.id
             permissions = await member_permissions(chatID, userID)
-            if userID not in OWNER_ID and permission not in permissions:
+            if userID not in SUDOERS and permission not in permissions:
                 return await unauthorised(message, permission, subFunc2)
             return await authorised(func, subFunc2, client, message, *args, **kwargs)
 
