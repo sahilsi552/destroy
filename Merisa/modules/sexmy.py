@@ -126,14 +126,14 @@ async def handle_inline_query(client, inline_query: InlineQuery):
         ]
         await client.answer_inline_query(inline_query.id, answers, cache_time=1, is_personal=True)
     else:
-        # Random Inline Responses with Horny Level and Cuteness Level
+        # Random Inline Responses with Sexy and Rich Levels
         results = generate_random_responses(mention, user_name, query_name)  # Use query_name for responses
         if not results:
             await inline_query.answer([], cache_time=1, is_personal=True)
             return
         await inline_query.answer(results, cache_time=1, is_personal=True)
 
-# Generate random inline responses including Cuteness Level
+# Generate random inline responses including Sexy and Rich Levels
 def generate_random_responses(mention, user_name, query_name):
     mm = random.randint(1, 100)
     cm = random.randint(5, 30)
@@ -149,6 +149,16 @@ def generate_random_responses(mention, user_name, query_name):
             "title": "Cuteness Level",
             "description": "Check how cute you are!",
             "text": f"🌸 {mention} is {mm}% cute!",
+        },
+        {
+            "title": "Sexy Level",
+            "description": "Check how sexy you are!",
+            "text": f"💋 {mention} is {mm}% sexy!",
+        },
+        {
+            "title": "Rich Level",
+            "description": "Check how rich you are!",
+            "text": f"💰 {mention} is {mm}% rich!",
         },
         {
             "title": "Gayness Level",
