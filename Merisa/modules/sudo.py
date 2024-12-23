@@ -14,7 +14,7 @@ from pyrogram.errors import (
     PeerIdInvalid,
 )
 import time, asyncio, logging, datetime
-
+from config import OWNER_ID
 
 @QuantamBot.on_message(filters.command(["bchat","broadcastchat"]) & filters.user(OWNER_ID) & filters.reply)
 async def broadcast_handler(bot: Client, m: Message):
