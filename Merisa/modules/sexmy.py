@@ -1,81 +1,99 @@
 import random
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
+from pyrogram import Client
+from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent, InlineKeyboardButton, InlineKeyboardMarkup
 from Merisa import QuantamBot as app
-from config import SUPPORT_GRP as SUPPORT_CHAT
+# Unified thumbnail URL
+THUMB_URL = "https://i.ibb.co/Dgd586R/file-5790.jpg"
 
-BUTTON = [[InlineKeyboardButton("🍒 ꜱᴜᴘᴘᴏʀᴛ 🍒", url=f"https://t.me/{SUPPORT_CHAT}")]]
-HOT = "https://telegra.ph/file/daad931db960ea40c0fca.gif"
-SMEXY = "https://telegra.ph/file/a23e9fd851fb6bc771686.gif"
-LEZBIAN = "https://telegra.ph/file/5609b87f0bd461fc36acb.gif"
-BIGBALL = "https://i.gifer.com/8ZUg.gif"
-LANG = "https://telegra.ph/file/423414459345bf18310f5.gif"
-CUTIE = "https://64.media.tumblr.com/d701f53eb5681e87a957a547980371d2/tumblr_nbjmdrQyje1qa94xto1_500.gif"
+BUTTON = [[InlineKeyboardButton("🔍 Check Your Result", switch_inline_query_current_chat="")]]
 
 
-@app.on_message(filters.command("horny"))
-async def horny(client, message):
-    user_id = message.from_user.id
-    user_name = message.from_user.first_name
-    mention = f"[{user_name}](tg://user?id={user_id})"
-    mm = random.randint(1, 100)
-    HORNY = f"🔥 {mention} ɪꜱ {mm}% ʜᴏʀɴʏ!"
-    await message.reply(HORNY, reply_markup=InlineKeyboardMarkup(BUTTON), photo=HOT)
+@app.on_inline_query()
+async def inline_queries(client, inline_query):
+    user_id = inline_query.from_user.id
+    user_name = inline_query.from_user.first_name
+    query = inline_query.query.strip()
 
-@app.on_message(filters.command("gay"))
-async def gay(client, message):
-    user_id = message.from_user.id
-    user_name = message.from_user.first_name
-    mention = f"[{user_name}](tg://user?id={user_id})"
-    mm = random.randint(1, 100)
-    GAY = f"🍷 {mention} ɪꜱ {mm}% ɢᴀʏ!"
-    await message.reply(GAY, reply_markup=InlineKeyboardMarkup(BUTTON), photo=SMEXY)
+    # If a query is provided, use it as the target name
+    if query:
+        target_name = query
+        mention = f"[{target_name}](tg://user?id={user_id})"
+    else:
+        mention = f"[{user_name}](tg://user?id={user_id})"  # Default to the sender's name
 
-@app.on_message(filters.command("lesbian"))
-async def lezbian(client, message):
-    user_id = message.from_user.id
-    user_name = message.from_user.first_name
-    mention = f"[{user_name}](tg://user?id={user_id})"
-    mm = random.randint(1, 100)
-    FEK = f"💜 {mention} ɪꜱ {mm}% ʟᴇᴢʙɪᴀɴ!"
-    await message.reply(FEK, reply_markup=InlineKeyboardMarkup(BUTTON), photo=LEZBIAN)
+    # Randomly generated values
+    mm = random.randint(1, 100)  # Random percentage
+    cm = random.randint(5, 30)  # Random size in cm for Dick/Vagina Depth
+    marriage_prob = random.randint(1, 100)  # Random marriage probability
+    name_start = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")  # Random starting letter for a name
 
-@app.on_message(filters.command("boob"))
-async def boob(client, message):
-    user_id = message.from_user.id
-    user_name = message.from_user.first_name
-    mention = f"[{user_name}](tg://user?id={user_id})"
-    mm = random.randint(1, 100)
-    BOOBS = f"🍒 {mention}'ꜱ ʙᴏᴏʙꜱ ꜱɪᴢᴇ ɪᴢ {mm}!"
-    await message.reply(BOOBS, reply_markup=InlineKeyboardMarkup(BUTTON), photo=BIGBALL)
+    results = []
 
-@app.on_message(filters.command("cock"))
-async def cock(client, message):
-    user_id = message.from_user.id
-    user_name = message.from_user.first_name
-    mention = f"[{user_name}](tg://user?id={user_id})"
-    mm = random.randint(1, 100)
-    COCK = f"🍆 {mention}'ꜱ ᴄᴏᴄᴋ ꜱɪᴢᴇ ɪᴢ {mm}ᴄᴍ"
-    await message.reply(COCK, reply_markup=InlineKeyboardMarkup(BUTTON), photo=LANG)
+    # List of responses
+    random_responses = [
+        {
+            "title": "Horny Level",
+            "description": "Check how horny you are!",
+            "text": f"🔥 {mention} is {mm}% horny!",
+        },
+        {
+            "title": "Gayness Level",
+            "description": "Check how gay you are!",
+            "text": f"🍷 {mention} is {mm}% gay!",
+        },
+        {
+            "title": "Marriage Probability",
+            "description": "Check your marriage probability with someone!",
+            "text": f"💍 Marriage probability of {mention} with '{query}' is {marriage_prob}%.",
+        },
+        {
+            "title": "Name Starts With",
+            "description": "Find out which letter your name starts with!",
+            "text": f"🔠 Your name starts with the letter '{name_start}'.",
+        },
+        {
+            "title": "Dick Size",
+            "description": "Check the size of your dick!",
+            "text": f"🍌 {mention}'s dick size is {cm} cm!",
+        },
+        {
+            "title": "Vagina Depth",
+            "description": "Check the depth of your vagina!",
+            "text": f"🌹 {mention}'s vagina depth is {cm} cm!",
+        },
+        {
+            "title": "Hotness Level",
+            "description": "Check how hot you are!",
+            "text": f"🔥 {mention} is {mm}% hot!",
+        },
+        {
+            "title": "MC Level",
+            "description": "Check your MC level!",
+            "text": f"⚡ {mention} is {mm}% MC!",
+        },
+        {
+            "title": "BC Level",
+            "description": "Check your BC level!",
+            "text": f"⚡ {mention} is {mm}% BC!",
+        },
+    ]
 
-@app.on_message(filters.command("cute"))
-async def cute(client, message):
-    user_id = message.from_user.id
-    user_name = message.from_user.first_name
-    mention = f"[{user_name}](tg://user?id={user_id})"
-    mm = random.randint(1, 100)
-    CUTE = f"🍑 {mention} {mm}% ᴄᴜᴛᴇ"
-    await message.reply(CUTE, reply_markup=InlineKeyboardMarkup(BUTTON), photo=CUTIE)
+    # Create results for inline query
+    for response in random_responses:
+        results.append(
+            InlineQueryResultArticle(
+                title=response["title"],
+                description=response["description"],
+                input_message_content=InputTextMessageContent(
+                    response["text"], disable_web_page_preview=True
+                ),
+                reply_markup=InlineKeyboardMarkup(BUTTON),
+                thumb_url=THUMB_URL,  # Unified thumbnail URL
+                thumb_width=100,
+                thumb_height=100,
+            )
+        )
 
-__HELP__ = """  
-*To check your current state:*  
-๏ /horny 🦄 : Check your current horniness level  
-๏ /gay 🌈 : Check your current gayness level  
-๏ /lesbian 🏳️‍🌈 : Check your current lesbian level  
-๏ /boobs 🍈🍈 : Check your current boob size  
-๏ /cute 🥰 : Check your current cuteness level  
-"""
-__MODULE__= "Sᴇᴍxʏ"
-
-
+    # Display results
+    if results:
+        await inline_query.answer(results, cache_time=1, is_personal=True)
