@@ -1,6 +1,6 @@
 
 from io import BytesIO
-
+from httpx import AsyncClient, Timeout
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
