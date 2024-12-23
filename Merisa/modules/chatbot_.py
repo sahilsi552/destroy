@@ -96,9 +96,6 @@ async def bot_Send_msg(_, message):
             or message.text.startswith("#")
         ):
             return
-        #x=await is_served_user(message.from_user.id)
-       # if x==False:
-         #   return await message.reply("you are not verifed user start me in pm to verfiy",reply_markup=VERIFY)
         if message.chat.type==ChatType.SUPERGROUP and message.reply_to_message.from_user.id==QuantamBot.id:
         
             existing_group = users_collection.find_one({"chat_id": message.chat.id})
@@ -121,7 +118,7 @@ async def bot_Send_msg(_, message):
                 except:
                     pass
                 await _.send_chat_action(message.chat.id, ChatAction.TYPING)
-                output=api.chatgpt(message.text,mode="gf")["results"]
+                output=requests.get("https://sugoi-api.vercel.app/chat?msg="+message.text).json()["response"]
                 await message.reply_text(text=output,quote=True)
         
     except:
