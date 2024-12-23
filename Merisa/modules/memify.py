@@ -40,7 +40,7 @@ async def drawText(image_path, text):
     if os.name == "nt":
         fnt = "ariel.ttf"
     else:
-        fnt = "Merisa/utils/fonts_.otf"
+        fnt = "./Merisa/utils/fonts_.otf"
 
     m_font = ImageFont.truetype(fnt, int((70 / 640) * i_width))
 
