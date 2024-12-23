@@ -140,6 +140,16 @@ def generate_random_responses(mention, user_name, query_name):
     marriage_prob = random.randint(1, 100)
     name_start = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
+    # Check if query_name has more than one part (i.e., a double name)
+    query_name_parts = query_name.split()
+    if len(query_name_parts) > 1:
+        # If it's a double name, use both parts for a more personalized marriage probability
+        full_name = " ".join(query_name_parts)
+        marriage_message = f"💍 Marriage probability of {mention} with {full_name} is {marriage_prob}%."
+    else:
+        # Single name scenario
+        marriage_message = f"💍 Marriage probability of {mention} with {query_name} is {marriage_prob}%."
+
     random_responses = [
         {
             "title": "Horny Level",
@@ -154,7 +164,7 @@ def generate_random_responses(mention, user_name, query_name):
         {
             "title": "Marriage Probability",
             "description": "Check your marriage probability with someone!",
-            "text": f"💍 Marriage probability of {mention} with {query_name} is {marriage_prob}%.",
+            "text": marriage_message,  # Updated marriage message
         },
         {
             "title": "Name Starts With",
