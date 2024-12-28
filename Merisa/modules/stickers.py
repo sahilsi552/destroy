@@ -34,7 +34,7 @@ import math
 from PIL import Image
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram.errors import TelegramError
+
 from io import BytesIO
 
 __MODULE__ = "Sᴛɪᴄᴋᴇʀs"
@@ -237,7 +237,7 @@ async def kang(client, message):
                 packname = f"a{str(packnum)}_{str(user.id)}_by_{client.me.username}"
             else:
                 packname_found = True
-        except TelegramError as e:
+        except Exception as e:
             if e.message == "Stickerset_invalid":
                 packname_found = True
 
@@ -302,7 +302,7 @@ async def kang(client, message):
             except OSError as e:
                 print(e)
                 return
-            except TelegramError as e:
+            except Exception as e:
                 if e.message == "Internal Server Error: sticker set not found (500)":
                     edited_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}")]])
                     await msg.reply_text(f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}", reply_markup=edited_keyboard, parse_mode="html")
@@ -333,7 +333,7 @@ async def kang(client, message):
                         packname = f"animated{str(packnum)}_{str(user.id)}_by_{client.me.username}"
                     else:
                         packname_found = True
-                except TelegramError as e:
+                except Exception as e:
                     if e.message == "Stickerset_invalid":
                         packname_found = True
 
@@ -341,7 +341,7 @@ async def kang(client, message):
                 await client.add_sticker_to_set(user.id, packname, tgs_sticker=open("kangsticker.tgs", "rb"), emojis=sticker_emoji)
                 edited_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}")]])
                 await adding_process.edit_text(f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}", reply_markup=edited_keyboard, parse_mode="html")
-            except TelegramError as e:
+            except Exception as e:
                 if e.message == "Internal Server Error: sticker set not found (500)":
                     edited_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}")]])
                     await adding_process.edit_text(f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}", reply_markup=edited_keyboard, parse_mode="html")
@@ -364,7 +364,7 @@ async def kang(client, message):
                         packname = f"video{str(packnum)}_{str(user.id)}_by_{client.me.username}"
                     else:
                         packname_found = True
-                except TelegramError as e:
+                except Exception as e:
                     if e.message == "Stickerset_invalid":
                         packname_found = True
 
@@ -372,7 +372,7 @@ async def kang(client, message):
                 await client.add_sticker_to_set(user.id, packname, webm_sticker=open("kangsticker.webm", "rb"), emojis=sticker_emoji)
                 edited_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}")]])
                 await adding_process.edit_text(f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}", reply_markup=edited_keyboard, parse_mode="html")
-            except TelegramError as e:
+            except Exception as e:
                 if e.message == "Internal Server Error: sticker set not found (500)":
                     edited_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="⎋ ᴘᴀᴄᴋ ⎋", url=f"t.me/addstickers/{packname}")]])
                     await adding_process.edit_text(f"<b>ʏᴏᴜʀ sᴛɪᴄᴋᴇʀ ʜᴀs ʙᴇᴇɴ ᴀᴅᴅᴇᴅ!</b>\nᴇᴍᴏᴊɪ ɪs ➼ : {sticker_emoji}", reply_markup=edited_keyboard, parse_mode="html")
@@ -450,7 +450,7 @@ async def makepack_internal(
                 emojis=emoji,
             )
 
-    except TelegramError as e:
+    except Exception as e:
         print(e)
         if e.message == "Sticker set name is already occupied":
             await msg.reply_text(

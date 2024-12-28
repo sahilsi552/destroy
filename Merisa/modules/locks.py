@@ -6,9 +6,9 @@ from pyrogram import filters
 from pyrogram.enums import MessageEntityType as MET
 from pyrogram.enums import MessageServiceType as MST
 from pyrogram.errors import ChatAdminRequired, ChatNotModified, RPCError
-from pyrogram.types import CallbackQuery, ChatPermissions, Message,chatt
+from pyrogram.types import CallbackQuery, ChatPermissions, Message
 from pyrogram.enums import ChatType, ChatMemberStatus as CMS
-from Merisa import LOGGER,QuantamBot as Goja
+from Merisa import LOGGER,QuantamBot as Mukesh
 from config import SUDOERS
 
 from Merisa.database.approve import Approve
@@ -67,7 +67,7 @@ l_t = """
 """
 
 
-@Gojo.on_message(filters.command("locktypes"))
+@Mukesh.on_message(filters.command("locktypes"))
 async def lock_types(_, m: Message):
     await m.reply_text(
         l_t
@@ -75,8 +75,8 @@ async def lock_types(_, m: Message):
     return
 
 
-@Gojo.on_message(filters.command("lock") & restrict_filter)
-async def lock_perm(c: Gojo, m: Message):
+@Mukesh.on_message(filters.command("lock") & restrict_filter)
+async def lock_perm(c: Mukesh, m: Message):
     if len(m.text.split()) < 2:
         await m.reply_text("Please enter a permission to lock!")
         return
@@ -96,7 +96,10 @@ async def lock_perm(c: Gojo, m: Message):
     info = get_perm.can_change_info
     invite = get_perm.can_invite_users
     pin = get_perm.can_pin_messages
-    stickers = animations = games = inlinebots = None
+    stickers =get_perm.can_send_stickers
+    animations =get_perm.can_send_gifs
+    games = get_perm.can_send_games
+    inlinebots=get_perm.can_send_inline
     lock = LOCKS()
 
     if lock_type == "all":
@@ -210,14 +213,16 @@ Use /locktypes to get the lock types"""
             ChatPermissions(
                 can_send_messages=msg,
                 can_send_media_messages=media,
-                can_send_other_messages=any(
-                    [stickers, animations, games, inlinebots]),
                 can_add_web_page_previews=webprev,
                 can_send_polls=polls,
                 can_change_info=info,
                 can_invite_users=invite,
                 can_pin_messages=pin,
-            ),
+                can_send_stickers=stickers,
+                can_send_games=games,
+                can_send_inline=inlinebots,
+                can_send_gifs=animations
+            )
         )
     except ChatNotModified:
         pass
@@ -228,7 +233,7 @@ Use /locktypes to get the lock types"""
     return
 
 
-@Gojo.on_message(filters.command("locks") & restrict_filter)
+@Mukesh.on_message(filters.command("locks") & restrict_filter)
 async def view_locks(_, m: Message):
     chkmsg = await m.reply_text(text="Checking Chat permissions...")
     v_perm = m.chat.permissions
@@ -245,8 +250,12 @@ async def view_locks(_, m: Message):
     bots = lock.get_lock_channel(m.chat.id, "bot")
 
     vmsg = await convert_to_emoji(v_perm.can_send_messages)
+
     vmedia = await convert_to_emoji(v_perm.can_send_media_messages)
-    vother = await convert_to_emoji(v_perm.can_send_other_messages)
+    vsticker = await convert_to_emoji(v_perm.can_send_stickers)
+    vanim= await convert_to_emoji(v_perm.can_send_gifs)
+    vgames= await convert_to_emoji(v_perm.can_send_games)
+    vinlinebots = await convert_to_emoji(v_perm.can_send_inline)
     vwebprev = await convert_to_emoji(v_perm.can_add_web_page_previews)
     vpolls = await convert_to_emoji(v_perm.can_send_polls)
     vinfo = await convert_to_emoji(v_perm.can_change_info)
@@ -265,10 +274,10 @@ async def view_locks(_, m: Message):
 
       <b>Send Messages:</b> {vmsg}
       <b>Send Media:</b> {vmedia}
-      <b>Send Stickers:</b> {vother}
-      <b>Send Animations:</b> {vother}
-      <b>Can Play Games:</b> {vother}
-      <b>Can Use Inline Bots:</b> {vother}
+      <b>Send Stickers:</b> {vsticker}
+      <b>Send Animations:</b> {vanim}
+      <b>Can Play Games:</b> {vgames}
+      <b>Can Use Inline Bots:</b> {vinlinebots}
       <b>Webpage Preview:</b> {vwebprev}
       <b>Send Polls:</b> {vpolls}
       <b>Change Info:</b> {vinfo}
@@ -281,14 +290,16 @@ async def view_locks(_, m: Message):
       <b>Can send links:</b> {vantil}
       <b>Can bot send messages:</b> {vantibot}
       """
-        except RPCError as e_f:
+            await chkmsg.edit_text(permission_view_str)
+      
+        except Exception as e_f:
             await chkmsg.edit_text(text="Something went wrong!")
             await m.reply_text(e_f)
-    return
+    
 
 
-@Gojo.on_message(filters.command("unlock") & restrict_filter)
-async def unlock_perm(c: Gojo, m: Message):
+@Mukesh.on_message(filters.command("unlock") & restrict_filter)
+async def unlock_perm(c: Mukesh, m: Message):
     if len(m.text.split()) < 2:
         await m.reply_text("Please enter a permission to unlock!")
         return
@@ -333,7 +344,12 @@ async def unlock_perm(c: Gojo, m: Message):
     uinfo = get_uperm.can_change_info
     uinvite = get_uperm.can_invite_users
     upin = get_uperm.can_pin_messages
-    ustickers = uanimations = ugames = uinlinebots = None
+    ustickers = get_uperm.can_send_stickers
+    uanimations = get_uperm.can_send_gifs
+    ugames = get_uperm.can_send_games
+    uinlinebots=get_uperm.can_send_inline
+    
+
 
     if unlock_type == "msg":
         umsg = True
@@ -440,14 +456,17 @@ async def unlock_perm(c: Gojo, m: Message):
             ChatPermissions(
                 can_send_messages=umsg,
                 can_send_media_messages=umedia,
-                can_send_other_messages=any(
-                    [ustickers, uanimations, ugames, uinlinebots],
-                ),
+                
                 can_add_web_page_previews=uwebprev,
                 can_send_polls=upolls,
                 can_change_info=uinfo,
                 can_invite_users=uinvite,
                 can_pin_messages=upin,
+                can_send_stickers=ustickers,
+                can_send_gifs=uanimations,
+                can_send_games=ugames,
+                can_send_inline=uinlinebots,
+                
             ),
         )
     except ChatNotModified:
@@ -459,7 +478,7 @@ async def unlock_perm(c: Gojo, m: Message):
     return
 
 
-async def delete_messages(c: Gojo, m: Message):
+async def delete_messages(c: Mukesh, m: Message):
     try:
         await m.delete()
         return
@@ -469,7 +488,7 @@ async def delete_messages(c: Gojo, m: Message):
         return
 
 
-async def is_approved_user(c: Gojo, m: Message):
+async def is_approved_user(c: Mukesh, m: Message):
     approved_users = Approve(m.chat.id).list_approved()
     ul = [user[0] for user in approved_users]
     try:
@@ -508,8 +527,8 @@ async def is_approved_user(c: Gojo, m: Message):
         return False
 
 
-@Gojo.on_message(filters.service & filters.group, 19)
-async def servicess(c: Gojo, m: Message):
+@Mukesh.on_message(filters.service & filters.group, 19)
+async def servicess(c: Mukesh, m: Message):
     if m.service != MST.NEW_CHAT_MEMBERS:
         return
     approved = await is_approved_user(c, m)
@@ -527,10 +546,11 @@ async def servicess(c: Gojo, m: Message):
     return
 
 
-@Gojo.on_message(filters.group & ~filters.me, 3)
-async def lock_del_mess(c: Gojo, m: Message):
+@Mukesh.on_message(filters.group & ~filters.me, 3)
+async def lock_del_mess(c: Mukesh, m: Message):
     lock = LOCKS()
     chat_locks = lock.get_lock_channel(m.chat.id)
+    # print(chat_locks)
     if not chat_locks:
         return
 
@@ -577,7 +597,7 @@ async def prevent_approved(m: Message):
     return
 
 
-__PLUGIN__ = "locks"
+__MODULE__ = "locks"
 
 __alt_name__ = ["grouplock", "lock", "grouplocks"]
 
@@ -602,8 +622,8 @@ Allows you to lock and unlock permission types in the chat.
 `/lock media`: this locks all the media messages in the chat."""
 
 
-@Gojo.on_callback_query(filters.regex("^LOCK_TYPES"))
-async def lock_types_callback(c: Gojo, q: CallbackQuery):
+@Mukesh.on_callback_query(filters.regex("^LOCK_TYPES"))
+async def lock_types_callback(c: Mukesh, q: CallbackQuery):
     data = q.data
 
     if data == "LOCK_TYPES":

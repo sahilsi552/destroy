@@ -2,7 +2,7 @@ import os
 from pyrogram import filters
 API_ID = os.environ.get("API_ID", 20892750)
 API_HASH = os.environ.get("API_HASH", "b0241677a3a2958667e93fa9a632c350")
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "6985264082:AAH2CYZfVBj9YGce7chLUehZR7b_nQHgcHQ")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "7021197483:AAH9cJ0cnUNqhL4xGLxrbBuvkMqVgab6cjg")
 UPDATE_CHNL = os.environ.get("UPDATE_CHNL", "sonamsupport")
 SUPPORT_GRP = os.environ.get("SUPPORT_GRP", "sonamsupport")
 LOG_GROUP_ID=os.environ.get("LOG_GROUP_ID",-1002233429395)
