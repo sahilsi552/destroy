@@ -40,3 +40,46 @@ def ikb(data: dict, row_width: int = 2):
     ikb({"click here": "this is callback data"})
     """
     return keyboard(data.items(), row_width=row_width)
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
+
+def ikb2(rows=None, back=False, todo="start_back"):
+    """
+    rows = pass the rows
+    back - if want to make back button
+    todo - callback data of back button
+    """
+    if rows is None:
+        rows = []
+    lines = []
+    try:
+        for row in rows:
+            line = []
+            for button in row:
+                btn_text = button.split(".")[1].capitalize()
+                button = btn(btn_text, button)  # InlineKeyboardButton
+                line.append(button)
+            lines.append(line)
+    except AttributeError:
+        for row in rows:
+            line = []
+            for button in row:
+                # Will make the kb which don't have "." in them
+                button = btn(*button)
+                line.append(button)
+            lines.append(line)
+    except TypeError:
+        # make a code to handel that error
+        line = []
+        for button in rows:
+            button = btn(*button)  # InlineKeyboardButton
+            line.append(button)
+        lines.append(line)
+    if back:
+        back_btn = [(btn("« Back", todo))]
+        lines.append(back_btn)
+    return InlineKeyboardMarkup(inline_keyboard=lines)
+
+
+def btn(text, value, type="callback_data"):
+    return InlineKeyboardButton(text, **{type: value})
