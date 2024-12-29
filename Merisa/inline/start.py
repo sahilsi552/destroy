@@ -46,7 +46,6 @@ def private_panel2():
                     [
                         InlineKeyboardButton(text="♻️ Aᴅᴠᴀɴᴄᴇ", callback_data="advance_help"),
                         InlineKeyboardButton(text="💡 UsᴇʀBᴏᴛ", callback_data="userbot_help"),
-                        
                     ],
                     
                     [ InlineKeyboardButton(text="๏ Hᴏᴍᴇ ๏", callback_data="semxx")
