@@ -347,8 +347,8 @@ async def memify_it(c: QuantamBot, m: Message):
     fiil = "black" if filll == "b" else "white"
     x = await m.reply_text("Memifying...")
     meme = m.text.split(None, 1)[1].strip()
-    # name = f"@memesofdank_{m.id}.png"
-    path = await rep_to.download()
+    name = f"@merisa_{m.id}.png"
+    path = await rep_to.download(name)
     is_sticker = bool(rep_to.sticker)
     output = await draw_meme(path, meme, is_sticker, fiil)
     # await x.delete()
@@ -515,6 +515,7 @@ async def quote_the_msg(_, m: Message):
     await m.reply_sticker(path)
     await to_edit.delete()
     os.remove(path)
+
 
 
 @QuantamBot.on_callback_query(filters.regex(r"^stickers_.*"))
