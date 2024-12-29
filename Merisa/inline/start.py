@@ -18,15 +18,16 @@ def private_panel():
     buttons = [
         [
             InlineKeyboardButton(
-                text="➕ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕",
+                text="➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ➕",
                 url=f"https://t.me/{app.username}?startgroup=s&admin=delete_messages+manage_video_chats+pin_messages+invite_users",
             )
         ],
         [
-            InlineKeyboardButton(text="📚 ʜᴇʟᴘ",callback_data="Main_help"),
+            InlineKeyboardButton(text="📚 Hᴇʟᴘ & Cᴏᴍᴍᴀɴᴅ",callback_data="Main_help"),
         ],
         [
-            InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇꜱ", url=f"https://t.me/{UPDATE_CHNL}"),
+            InlineKeyboardButton(text="Uᴘᴅᴀᴛᴇs 📢", url=f"https://t.me/{UPDATE_CHNL}"),
+            InlineKeyboardButton(text="Sᴜᴘᴘᴏʀᴛ 🆘", url=f"https://t.me/{UPDATE_CHNL}"),
         ],
     ]
     return buttons
@@ -45,10 +46,9 @@ def private_panel2():
                     [
                         InlineKeyboardButton(text="♻️ Aᴅᴠᴀɴᴄᴇ", callback_data="advance_help"),
                         InlineKeyboardButton(text="💡 UsᴇʀBᴏᴛ", callback_data="userbot_help"),
-                        
                     ],
                     
-                    [ InlineKeyboardButton(text="• Hᴏᴍᴇ •", callback_data="semxx")
+                    [ InlineKeyboardButton(text="๏ Hᴏᴍᴇ ๏", callback_data="semxx")
                     ],
                 ]
             )

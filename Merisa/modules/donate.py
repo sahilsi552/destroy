@@ -9,7 +9,7 @@ async def message_handler(client: Client, message: types.Message):
         if amount <= 0:
             raise ValueError("Amount must be greater than 0")
     except (IndexError, ValueError):
-        await message.reply("Please specify a valid amount. Usage: /support <amount>")
+        await message.reply("Please specify a valid amount. ```Usage: /support <amount>```")
         return
 
     # Send the invoice
