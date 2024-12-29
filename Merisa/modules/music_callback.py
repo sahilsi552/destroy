@@ -73,22 +73,22 @@ async def Music_about_callback(bot, query):
             reply_markup=InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="ᴀᴅᴍɪɴ", callback_data="Music_admin"),
-            InlineKeyboardButton(text="Auth", callback_data="Music_auth"),
-            InlineKeyboardButton(text="C-Play", callback_data="Music_Cplay"),
+            InlineKeyboardButton(text="Aᴅᴍɪɴ", callback_data="Music_admin"),
+            InlineKeyboardButton(text="Aᴜᴛʜ", callback_data="Music_auth"),
+            InlineKeyboardButton(text="C-ᴘʟᴀʏ", callback_data="Music_Cplay"),
         ],
         [
-            InlineKeyboardButton(text="Loop", callback_data="Music_loop"),
-            InlineKeyboardButton(text="ᴘʟᴀʏ ", callback_data="Music_play"),
-            InlineKeyboardButton(text=" ʙᴏᴛ", callback_data="Music_bot"),
+            InlineKeyboardButton(text="Lᴏᴏᴘ", callback_data="Music_loop"),
+            InlineKeyboardButton(text="Pʟᴀʏ", callback_data="Music_play"),
+            InlineKeyboardButton(text="Bᴏᴛ", callback_data="Music_bot"),
         ],
         [
-            InlineKeyboardButton(text="shuffle", callback_data="Music_shuffle"),
-            InlineKeyboardButton(text="Seek", callback_data="Music_seek"),
-            InlineKeyboardButton(text="Speed", callback_data="Music_speed"),
+            InlineKeyboardButton(text="Sʜᴜғғʟᴇ", callback_data="Music_shuffle"),
+            InlineKeyboardButton(text="Sᴇᴇᴋ", callback_data="Music_seek"),
+            InlineKeyboardButton(text="Sᴘᴇᴇᴅ", callback_data="Music_speed"),
         ],
         [  # Added comma here
-            InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Main_help"),
+            InlineKeyboardButton(text="๏ ʙᴀᴄᴋ ๏", callback_data="Main_help"),
         ],
     ]
 )
