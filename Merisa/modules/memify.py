@@ -15,7 +15,7 @@ async def handler(client, message):
         await message.reply("Reply to an image/sticker. 🖼️")
         return
 
-    file_path = await client.download_media(reply_message)
+    file_path = await reply_message.download()
 
     msg = await message.reply("Memifying this image! ✊🏻")
 
@@ -30,7 +30,7 @@ async def handler(client, message):
     await client.send_document(message.chat.id, document=meme_path)
 
     await msg.delete()
-    os.remove(meme_path)
+    # os.remove(meme_path)
     
 async def drawText(image_path, text):
     
@@ -161,4 +161,4 @@ async def drawText(image_path, text):
 
     img.save(webp_file, "webp")
 
-    return webp_file
+    # return webp_file

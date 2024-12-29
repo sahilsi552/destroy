@@ -15,7 +15,7 @@ from ..utils import (
     
 )
 from music_text import *
-from Merisa.userbot.start import ub_help
+
 from Merisa.inline import (private_panel,
     start_pannel,
     private_help_panel,admin_help_panel,private_panel2
@@ -254,7 +254,7 @@ async def advance_callback(bot, query):
                     ],
                     [
                         InlineKeyboardButton(text="🍹 Aᴅᴠᴀɴᴄᴇ", callback_data="advance_help"),
-                        InlineKeyboardButton(text="🤖 UsᴇʀBᴏᴛ", callback_data="userbot_help"),
+                      
                         
                     ],
                     [
@@ -355,15 +355,5 @@ Yᴏᴜ ᴄᴀɴ ʜᴇʟᴘ ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴘᴍᴇɴᴛ ᴡɪᴛʜ 
                 ]
             ),
             )  
-    elif query.data=="userbot_help":
-        await query.answer(" ʜᴇʀᴇ ɪꜱ  Userbot ʜᴇʟᴘ ᴍᴇɴᴜ ")
-        await query.message.delete()
-        await query.message.reply_text(ub_help,reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Main_help"),InlineKeyboardButton(text="Cʟᴏsᴇ", callback_data="closeforce")
-                    ]
-                ]
-            ),
-        )
+    
         

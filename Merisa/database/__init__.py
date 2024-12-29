@@ -7,6 +7,7 @@ from .notes_db import *
 from .welcome_db import *
 from .filters_db import *
 from .gban_db import *
+from .rules import *
 from sys import exit as exiter
 
 from pymongo import MongoClient

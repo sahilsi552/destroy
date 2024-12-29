@@ -68,3 +68,5 @@ async def delete_note(chat_id: int, name: str) -> bool:
     return False
 
 
+async def deleteall_notes(chat_id: int):
+    return await notesdb.delete_one({"chat_id": chat_id})

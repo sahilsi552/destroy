@@ -19,6 +19,7 @@ from Merisa.utils.database import (
     get_filter,
     get_filters_names,
     save_filter,
+    
 )
 from Merisa.utils.functions import (
     check_format,
@@ -46,7 +47,6 @@ def extract_urls(reply_markup):
 
 __MODULE__ = "Fɪʟᴛᴇʀs"
 __HELP__ = """
-Fɪʟᴛᴇʀs
 Description:
 The filters module allows you to set custom filters for your group. When a user sends a message that contains a filter word, the bot will reply with the set reply. Filters can be set to reply with text, media, or buttons.
 

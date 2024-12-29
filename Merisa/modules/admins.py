@@ -13,7 +13,8 @@ from pyrogram.types import (
 )
 from Merisa import QuantamBot as app
 from ..utils import *
-
+from Merisa.utils.database import *
+from Merisa.database import *
 
 __MODULE__ = "Aᴅᴍɪɴs"
 __HELP__ = """

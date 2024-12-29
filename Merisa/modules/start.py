@@ -13,21 +13,13 @@ from pyrogram.enums import ChatType, ParseMode
 loop = asyncio.get_running_loop()
 
 
-@QuantamBot.on_message(filters.command(["start", "help"]) & ~config.BANNED_USERS & ~filters.group & ~filters.forwarded)
-async def private_start(app, message: Message):
+@QuantamBot.on_message(filters.command(["start"]) & ~config.BANNED_USERS  & ~filters.forwarded)
+async def _start(app, message: Message):
     user_id = message.from_user.id
     
     if len(message.text.split()) > 1:
         name = message.text.split(None, 1)[1]
-        if name[0:4] == "help":
-            buttons = page_load(0, HELPABLE, "help")
-            return await message.reply_photo(
-                photo=config.START_IMG,
-                caption="ᴄʜᴏᴏsᴇ ᴛʜᴇ ᴄᴀᴛᴇɢᴏʀʏ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴɴᴀ ɢᴇᴛ ʜᴇʟᴩ.\nᴀsᴋ ʏᴏᴜʀ ᴅᴏᴜʙᴛs ᴀᴛ @{}\n\n๏ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴡɪᴛʜ : `/`".format(
-                    config.SUPPORT_GRP
-                ),
-                reply_markup=InlineKeyboardMarkup(buttons),
-            )
+        
         if await is_on_off(2):
             sender_id = message.from_user.id
             sender_name = message.from_user.mention
@@ -74,11 +66,40 @@ async def start(_, m):
             await chat_id(m.chat.id)
             
 
-    except Exception as e:
-        await m.reply(e)
+    except Exception:
+        pass
 
 
+@QuantamBot.on_message(filters.command(["help"]) & ~config.BANNED_USERS  & ~filters.forwarded )
+async def _start(app, message: Message):
+    user_id = message.from_user.id
+    if message.chat.type == ChatType.PRIVATE:
+        button=private_panel2()
+        await message.reply_text("𝙎𝙚𝙡𝙚𝙘𝙩 𝙩𝙝𝙚 𝙨𝙚𝙘𝙩𝙞𝙤𝙣 𝙩𝙝𝙖𝙩 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙤𝙥𝙚𝙣",reply_markup=button)
+    else:
+        await message.reply_text("Contact me in PM for help!",
+         reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="👤 ᴏᴩᴇɴ ɪɴ ᴩʀɪᴠᴀᴛᴇ ᴄʜᴀᴛ",
+                            url="https://t.me/{}?start=help".format(context.bot.username),
+                        )
+                    ],
+                    ]))
+            
+    
+    
+    
         
 
             
-
+'''if name[0:4] == "help":
+            buttons = page_load(0, HELPABLE, "help")
+            return await message.reply_photo(
+                photo=config.START_IMG,
+                caption="ᴄʜᴏᴏsᴇ ᴛʜᴇ ᴄᴀᴛᴇɢᴏʀʏ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴɴᴀ ɢᴇᴛ ʜᴇʟᴩ.\nᴀsᴋ ʏᴏᴜʀ ᴅᴏᴜʙᴛs ᴀᴛ @{}\n\n๏ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴡɪᴛʜ : `/`".format(
+                    config.SUPPORT_GRP
+                ),
+                reply_markup=InlineKeyboardMarkup(buttons),
+            )'''
