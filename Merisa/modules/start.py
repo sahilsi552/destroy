@@ -70,7 +70,7 @@ async def start(_, m):
         pass
 
 
-@QuantamBot.on_message(filters.command(["help"]) & ~config.BANNED_USERS  & ~filters.forwarded )
+@QuantamBot.on_message(filters.command("help") & ~config.BANNED_USERS  & ~filters.forwarded )
 async def _start(app, message: Message):
     user_id = message.from_user.id
     if message.chat.type == ChatType.PRIVATE:
