@@ -8,53 +8,56 @@ from bs4 import BeautifulSoup
 from ..utils.button_help import ADD_ME
 from pyrogram.types import InlineKeyboardMarkup
 from pySmartDL import SmartDL
+import httpx
+DOWNLOADING_STICKER_ID = (
+    "CAACAgEAAx0CfD7LAgACO7xmZzb83lrLUVhxtmUaanKe0_ionAAC-gADUSkNORIJSVEUKRrhHgQ"
+)
+API_URL = "https://karma-api2.vercel.app/instadl"  # Replace with your actual API URL
 
-@QuantamBot.on_message(filters.command(["instadownload", "instadl"]))
-async def instadownload(bot, message):
+
+@QuantamBot.on_message(filters.command(["ig", "insta"]))
+async def instadl_command_handler(client, message):
+    if len(message.command) < 2:
+        await message.reply_text("Usage: /insta [Instagram URL]")
+        return
+
+    link = message.command[1]
     try:
-        if message.reply_to_message:
-            text = message.reply_to_message.text
-        elif not message.reply_to_message and len(message.command) != 1:
-            text = message.text.split(None, 1)[1]
-        else:
-            await message.reply("Please provide a valid Instagram URL.", quote=True)
-            return
-        
-        link = f"https://instagramdownloader.apinepdev.workers.dev/?url={text}"
-        
-        # Make the API request
-        response = requests.get(link)
-        if response.status_code == 200:
-            try:
-                data = response.json()
-                insta = data["data"][0]["url"]
-                
-                # Send the video or photo
-                try:
-                    await message.reply_video(insta, caption=f"""━━━━━━━{QuantamBot.mention}━━━━━━━
+        downloading_sticker = await message.reply_sticker(DOWNLOADING_STICKER_ID)
 
-☘️  ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ☘️
-◈──────────────◈
-🔥 ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ʙʏ : @{QuantamBot.username}
-━━━━━━━{QuantamBot.mention}━━━━━━━""",
-                                         reply_markup=InlineKeyboardMarkup(ADD_ME),
-                                         quote=True)
-                except:
-                    await message.reply_photo(insta, caption=f"""━━━━━━━{QuantamBot.mention}━━━━━━━
+        # Make an asynchronous GET request to the API using httpx
+        async with httpx.AsyncClient() as client:
+            response = await client.get(API_URL, params={"url": link})
+            response.raise_for_status()
+            data = response.json()
 
-☘️ ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ☘️
-◈──────────────◈
-🔥 ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ʙʏ : @{QuantamBot.username}
-━━━━━━━{QuantamBot.mention}━━━━━━━""",
-                                             reply_markup=InlineKeyboardMarkup(ADD_ME),
-                                             quote=True)
-            except (KeyError, IndexError):
-                await message.reply("Could not parse the API response. Please try again later.", quote=True)
+        # Check if the API request was successful
+        if "content_url" in data:
+            content_url = data["content_url"]
+
+            # Determine content type from the URL
+            content_type = "video" if "video" in content_url else "photo"
+
+            # Reply with either photo or video
+            if content_type == "photo":
+                await message.reply_photo(content_url)
+            elif content_type == "video":
+                await message.reply_video(content_url)
+            else:
+                await message.reply_text("Unsupported content type.")
         else:
-            await message.reply(f"API request failed with status code {response.status_code}.", quote=True)
+            await message.reply_text(
+                "Unable to fetch content. Please check the Instagram URL or try with another Instagram link."
+            )
+
     except Exception as e:
-        await message.reply(f"An error occurred: {str(e)}", quote=True)
+        print(e)
+        await message.reply_text(
+            "An error occurred while processing the request."
+        )
 
+    finally:
+        await downloading_sticker.delete()
 
 
 @QuantamBot.on_message(filters.command(["twitterdl"]))
