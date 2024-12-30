@@ -1,7 +1,7 @@
 import requests
 from pyrogram import filters
 
-from DnsXMusic import app
+from .. import QuantamBot as app
 from SafoneAPI import SafoneAPI
 
 
