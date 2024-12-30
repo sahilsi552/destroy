@@ -8,40 +8,52 @@ from bs4 import BeautifulSoup
 from ..utils.button_help import ADD_ME
 from pyrogram.types import InlineKeyboardMarkup
 from pySmartDL import SmartDL
-@QuantamBot.on_message(filters.command(["instadownload","instadl"]))
+
+@QuantamBot.on_message(filters.command(["instadownload", "instadl"]))
 async def instadownload(bot, message):
     try:
         if message.reply_to_message:
             text = message.reply_to_message.text
         elif not message.reply_to_message and len(message.command) != 1:
             text = message.text.split(None, 1)[1]
+        else:
+            await message.reply("Please provide a valid Instagram URL.", quote=True)
+            return
         
-            link = f"https://instagramdownloader.apinepdev.workers.dev/?url={text}"
-            response = requests.get(link).json()
-            insta=response["data"][0]["url"]
-            
-
-            #print(response["data"][0]["url"])
+        link = f"https://instagramdownloader.apinepdev.workers.dev/?url={text}"
+        
+        # Make the API request
+        response = requests.get(link)
+        if response.status_code == 200:
             try:
-                await message.reply_video(insta,caption=f"""━━━━━━━{QuantamBot.mention}━━━━━━━
+                data = response.json()
+                insta = data["data"][0]["url"]
+                
+                # Send the video or photo
+                try:
+                    await message.reply_video(insta, caption=f"""━━━━━━━{QuantamBot.mention}━━━━━━━
 
 ☘️  ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ☘️
 ◈──────────────◈
 🔥 ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ʙʏ : @{QuantamBot.username}
-━━━━━━━{QuantamBot.mention}━━━━━━━""",reply_markup=InlineKeyboardMarkup(ADD_ME)
-,quote=True)
-            except:
-                await message.reply_photo(insta,caption=f"""━━━━━━━{QuantamBot.mention}━━━━━━━
+━━━━━━━{QuantamBot.mention}━━━━━━━""",
+                                         reply_markup=InlineKeyboardMarkup(ADD_ME),
+                                         quote=True)
+                except:
+                    await message.reply_photo(insta, caption=f"""━━━━━━━{QuantamBot.mention}━━━━━━━
 
 ☘️ ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ☘️
 ◈──────────────◈
 🔥 ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ʙʏ : @{QuantamBot.username}
-━━━━━━━{QuantamBot.mention}━━━━━━━""",reply_markup=InlineKeyboardMarkup(ADD_ME)
-,quote=True)
-            
-                
+━━━━━━━{QuantamBot.mention}━━━━━━━""",
+                                             reply_markup=InlineKeyboardMarkup(ADD_ME),
+                                             quote=True)
+            except (KeyError, IndexError):
+                await message.reply("Could not parse the API response. Please try again later.", quote=True)
+        else:
+            await message.reply(f"API request failed with status code {response.status_code}.", quote=True)
     except Exception as e:
-        await message.reply(e,quote=True)
+        await message.reply(f"An error occurred: {str(e)}", quote=True)
 
 
 
