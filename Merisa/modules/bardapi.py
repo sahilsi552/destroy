@@ -1,3 +1,4 @@
+'''
 # bard
 # -----------CREDITS -----------
 # telegram : @legend_coder
@@ -28,3 +29,4 @@ async def gemini_reply(b, message):
     text=await question(message)
     search_result = api.gemini(text)["results"]
     await message.reply_text(search_result,reply_markup=InlineKeyboardMarkup(IMGX),parse_mode=ParseMode.MARKDOWN,quote=True,disable_web_page_preview =True)
+'''
