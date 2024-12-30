@@ -1,124 +1,47 @@
-"""MIT License
+#
+# Copyright (C) 2024 by MISH0009@Github, < https://github.com/MISH0009 >.
+#
+# This file is part of < https://github.com/MISH0009/DNS > project,
+# and is released under the MIT License.
+# Please see < https://github.com/MISH0009/DNS/blob/master/LICENSE >
+#
+# All rights reserved.
 
-Copyright (c) 2023-24 Noob-QuantamBot
+import re
 
-          GITHUB: NOOB-MUKESH
-          TELEGRAM: @MR_SUKKUN
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE."""
-import datetime
-from typing import List
-
-import requests
-from .. import QuantamBot
+from pymongo import MongoClient
 from pyrogram import filters
-from pyrogram.enums import ParseMode
-TIME_API_KEY="HFHHDLWNTS5Y"
+from pyrogram.types import Message
 
-def generate_time(to_find: str, findtype: List[str]) -> str:
-    data = requests.get(
-        f"https://api.timezonedb.com/v2.1/list-time-zone"
-        f"?key={TIME_API_KEY}"
-        f"&format=json"
-        f"&fields=countryCode,countryName,zoneName,gmtOffset,timestamp,dst"
-    ).json()
+from DnsXMusic import app
 
-    for zone in data["zones"]:
-        for eachtype in findtype:
-            if to_find in zone[eachtype].lower():
-                country_name = zone["countryName"]
-                country_zone = zone["zoneName"]
-                country_code = zone["countryCode"]
+mongo_url_pattern = re.compile(r"mongodb(?:\+srv)?:\/\/[^\s]+")
 
-                if zone["dst"] == 1:
-                    daylight_saving = "Yes"
-                else:
-                    daylight_saving = "No"
 
-                date_fmt = r"%d-%m-%Y"
-                time_fmt = r"%H:%M:%S"
-                day_fmt = r"%A"
-                gmt_offset = zone["gmtOffset"]
-                timestamp = datetime.datetime.now(
-                    datetime.timezone.utc
-                ) + datetime.timedelta(seconds=gmt_offset)
-                current_date = timestamp.strftime(date_fmt)
-                current_time = timestamp.strftime(time_fmt)
-                current_day = timestamp.strftime(day_fmt)
-
-                break
-
-    try:
-        result = (
-            f"<b>Country:</b> <code>{country_name}</code>\n"
-            f"<b>Zone Name:</b> <code>{country_zone}</code>\n"
-            f"<b>Country Code:</b> <code>{country_code}</code>\n"
-            f"<b>Daylight saving:</b> <code>{daylight_saving}</code>\n"
-            f"<b>Day:</b> <code>{current_day}</code>\n"
-            f"<b>Current Time:</b> <code>{current_time}</code>\n"
-            f"<b>Current Date:</b> <code>{current_date}</code>\n"
-            '<b>Timezones:</b> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List here</a>'
+@app.on_message(filters.command("mongochk"))
+async def mongo_command(client, message: Message):
+    if len(message.command) < 2:
+        await message.reply(
+            "ᴘʟᴇᴀsᴇ ᴇɴᴛᴇʀ ʏᴏᴜʀ ᴍᴏɴɢᴏᴅʙ ᴜʀʟ ᴀғᴛᴇʀ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅ  `/mongochk your_mongodb_url`"
         )
-    except:
-        result = None
-
-    return result
-
-@QuantamBot.on_message(filters.command("timezone"))
-async def gettime(_,message):
-
-    try:
-        
-        query =await message.text.split(" ", 1)[1]
-    except:
-        await message.reply_text("Provide a country name/abbreviation/timezone to find.")
         return
-    send_message =await message.reply_text(
-        f"Finding timezone info for <b>{query}</b>", parse_mode=ParseMode.HTML
-    )
 
-    query_timezone = query.lower()
-    if len(query_timezone) == 2:
-        result = generate_time(query_timezone, ["countryCode"])
+    mongo_url = message.command[1]
+    if re.match(mongo_url_pattern, mongo_url):
+        try:
+            # Attempt to connect to the MongoDB instance
+            client = MongoClient(mongo_url, serverSelectionTimeoutMS=5000)
+            client.server_info()  # Will cause an exception if connection fails
+            await message.reply("ᴍᴏɴɢᴏᴅʙ ᴜʀʟ ɪs ᴠᴀʟɪᴅ ᴀɴᴅ ᴄᴏɴɴᴇᴄᴛɪᴏɴ sᴜᴄᴇssғᴜʟ ✅")
+        except Exception as e:
+            await message.reply(f"ғᴀɪʟᴇᴅ ᴛᴏ ᴄᴏɴɴᴇᴄᴛ ᴍᴏɴɢᴏᴅʙ: {e}")
     else:
-        result = generate_time(query_timezone, ["zoneName", "countryName"])
-
-    if not result:
-        await send_message.edit_text(
-            f"Timezone info not available for <b>{query}</b>\n"
-            '<b>All Timezones:</b> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List here</a>',
-            parse_mode=ParseMode.HTML,
-            disable_web_page_preview=True,
-        )
-        return
-
-    await send_message.edit_text(
-        result, parse_mode=ParseMode.HTML, disable_web_page_preview=True
-    )
+        await message.reply("ᴜᴘs! ʏᴏᴜʀ ᴍᴏɴɢᴏᴅʙ ғᴏʀᴍᴀᴛ ɪs ɪɴᴠᴀʟɪᴅ")
 
 
+__MODULE__ = "Mᴏɴɢᴏᴅʙ"
 __HELP__ = """
- ❍ /time <ǫᴜᴇʀʏ>*:* ɢɪᴠᴇs ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴀ ᴛɪᴍᴇᴢᴏɴᴇ.
-*ᴀᴠᴀɪʟᴀʙʟᴇ ǫᴜᴇʀɪᴇs:* ᴄᴏᴜɴᴛʀʏ ᴄᴏᴅᴇ/ᴄᴏᴜɴᴛʀʏ ɴᴀᴍᴇ/ᴛɪᴍᴇᴢᴏɴᴇ ɴᴀᴍᴇ
+**ᴍᴏɴɢᴏᴅʙ ᴄʜᴇᴄᴋᴇʀ:**
 
- ❍ ⏰ [ᴛɪᴍᴇᴢᴏɴᴇs ʟɪsᴛ](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-
-💡 ᴇx:- /time ɪɴ *:* ɪᴛ ᴡɪʟʟ sʜᴏᴡs ɪɴᴅɪᴀɴ ᴄᴜʀʀᴇɴᴛ ᴛɪᴍᴇ ᴀɴᴅ ᴅᴀᴛᴇ..
+๏ `/mongochk [mongo_url]`: Cʜᴇᴄᴋs ᴛʜᴇ ᴠᴀʟɪᴅɪᴛʏ ᴏғ ᴀ ᴍᴏɴɢᴏᴅʙ URL ᴀɴᴅ ᴄᴏɴɴᴇᴄᴛɪᴏɴ ᴛᴏ ᴛʜᴇ ᴍᴏɴɢᴏᴅʙ ɪɴsᴛᴀɴᴄᴇ.
 """
-__MODULE__ = "Tɪᴍᴇ"
