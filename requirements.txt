@@ -57,8 +57,7 @@ pymongo==4.9.2
 pyparsing==3.2.0
 pyppeteer==2.0.0
 pyquery==2.0.1
-pyrofork==2.3.48
-pyrogram==2.0.106
+pyrofork
 pyshorteners==1.0.1
 pysocks==1.7.1
 pytz==2024.2
